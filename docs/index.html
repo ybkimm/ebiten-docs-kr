@@ -41,18 +41,25 @@
       <ul>
         <li lang="en"><a href="/">Home</a></li>
         <li lang="ja"><a href="/">ホーム</a></li>
+        <li lang="kr"><a href="/">홈</a></li>
         <li lang="en"><a href="https://github.com/hajimehoshi/ebiten">Source code</a></li>
         <li lang="ja"><a href="https://github.com/hajimehoshi/ebiten">ソースコード</a></li>
+        <li lang="kr"><a href="https://github.com/hajimehoshi/ebiten">소스코드</a></li>
         <li lang="en"><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2">API reference</a></li>
         <li lang="ja"><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2">API リファレンス</a></li>
+        <li lang="kr"><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2">API 레퍼런스</a></li>
         <li lang="en"><a href="/tour/">Tour (WIP)</a></li>
         <li lang="ja"><a href="/tour/">ツアー (未完成)</a></li>
+        <li lang="kr"><a href="/tour/">투어 (미완성)</a></li>
         <li lang="en"><a href="/documents/">Documents</a></li>
         <li lang="ja"><a href="/documents/">ドキュメント</a></li>
+        <li lang="kr"><a href="/documents/">문서</a></li>
         <li lang="en"><a href="/examples/">Examples</a></li>
         <li lang="ja"><a href="/examples/">サンプル</a></li>
+        <li lang="kr"><a href="/examples/">샘플</a></li>
         <li lang="en"><a href="/blog/">Blog</a></li>
         <li lang="ja"><a href="/blog/">ブログ</a></li>
+        <li lang="kr"><a href="/blog/">블로그</a></li>
       </ul>
       
     </nav>
@@ -68,9 +75,11 @@
     <h1 class="big"><span class="main">Ebiten</span><span class="sub">A dead simple 2D game library for Go</span></h1>
     <p lang="en">Ebiten is an open source game library for <a href="https://golang.org/">the Go programming language</a>. Ebiten's simple API allows you to quickly and easily develop 2D games that can be deployed across multiple platforms.</p>
     <p lang="ja">Ebiten は<a href="https://golang.org/">プログラミング言語 Go</a> のオープンソースなゲームライブラリです。シンプルな API を使って、マルチプラットフォームな 2D ゲームを開発することができます。</p>
+    <p lang="kr">Ebiten 은<a href="https://golang.org/">Go 언어</a>로 작성된 오픈소스 게임 라이브러리입니다. 심플한 API로 멀티플랫폼 2D 게임을 개발할 수 있습니다.</p>
     <ul class="toplinks">
       <li lang="en"><img src="images/github.png" width="16" height="16" alt="GitHub"><a href="https://github.com/hajimehoshi/ebiten"><code>hajimehoshi/ebiten</code></a> (<a href="/documents/install.html">Install</a>)</li>
       <li lang="ja"><img src="images/github.png" width="16" height="16" alt="GitHub"><a href="https://github.com/hajimehoshi/ebiten"><code>hajimehoshi/ebiten</code></a> (<a href="/documents/install.html">インストール</a>)</li>
+      <li lang="kr"><img src="images/github.png" width="16" height="16" alt="GitHub"><a href="https://github.com/hajimehoshi/ebiten"><code>hajimehoshi/ebiten</code></a> (<a href="/documents/install.html">설치</a>)</li>
     </ul>
   </div>
   <div class="grid-item-2">
@@ -79,6 +88,7 @@
 </div>
 <h2 lang="en">Playable Examples</h2>
 <h2 lang="ja">遊べるサンプル</h2>
+<h2 lang="kr">실행 가능한 샘플</h2>
 <div class="grid-container">
   <div class="grid-item-1">
     <h3>2048</h3>
@@ -95,62 +105,77 @@
   <div class="grid-item-1">
     <h3 lang="en">30+ More Examples</h3>
     <h3 lang="ja">その他サンプル 30 以上</h3>
+    <h3 lang="kr">30개 이상의 예제들</h3>
     <p class="img thumbnail"><a href="examples/"><img src="images/moreexamples.png" width="400" height="300" alt="More examples"></a></p>
   </div>
 </div>
 <h2 lang="en">What is Ebiten?</h2>
 <h2 lang="ja">Ebiten の特徴</h2>
+<h2 lang="kr">Ebiten의 특징</h2>
 <div class="grid-container">
   <div class="grid-item-2">
     <h3 lang="en">Dead Simple</h3>
     <h3 lang="ja">とてもシンプル</h3>
+    <h3 lang="kr">아주 심플함</h3>
     <p class="img"><img src="images/deadsimple.png" width="448" height="224" alt="Dead Simple"></p>
     <p lang="en">In Ebiten, everything is an image: the screen, data from an image file, and even offscreen items are all represented as image objects. Most rendering operations consist of drawing one image on top of another.</p>
     <p lang="ja">ほとんどの描画命令は画像から画像への描画として表現されます。画面、画像ファイル、オフスクリーンなど、あらゆるものが画像として表現されます。</p>
+    <p lang="kr">대부분의 렌더링 명령은 이미지 위에 이미지를 그리는 식으로 진행됩니다. 화면부터 이미지 파일은 물론 오프스크린까지 모든 게 이미지로 표현됩니다.</p>
   </div>
   <div class="grid-item-2">
     <h3 lang="en">Multiplatform</h3>
     <h3 lang="ja">マルチプラットフォーム</h3>
+    <h3 lang="kr">멀티플랫폼</h3>
     <p class="img"><img src="images/multiplatforms.png" width="448" height="224" alt="Multiplatform"></p>
     <p lang="en">Ebiten games work on desktop (Windows, macOS, Linux, and FreeBSD), web browsers (through WebAssembly), and even on mobile (Android and iOS)! Plus, Ebiten is implemented in pure Go on Windows, so Windows developers do not need to install a C compiler. Nintendo Switch™ is also supported!</p>
     <p lang="ja">Ebiten のゲームは様々な環境で動きます。デスクトップ (Windows、macOS、Linux、FreeBSD)、 Web ブラウザ (WebAssembly)、モバイル (Android と iOS) で動きます。さらに、 Windows 向けビルドは Pure Go なので、 C コンパイラなしで開発できます。 Nintendo Switch™ もサポートされています。</p>
+    <p lang="kr">Ebiten으로 개발한 게임은 다양한 환경에서 구동할 수 있습니다. 데스크탑 (Windows, macOS, Linux, FreeBSD), 웹브라우저 (WebAssembly), 모바일 (안드로이드나 iOS)에서 구동되며, Windows 빌드는 Pure Go로, C 컴파일러가 없어도 개발이 가능합니다. Nintendo Switch™ 역시 지원합니다.</p>
   </div>
   <div class="grid-item-2">
     <h3 lang="en">High Performance</h3>
     <h3 lang="ja">高いパフォーマンス</h3>
+    <h3 lang="kr">고성능</h3>
     <p class="img"><img src="images/highperformance.png" width="448" height="224" alt="High Performance"></p>
     <p lang="en">While Ebiten's drawing API is very simple, Ebiten games run very fast with GPU power. Multiple images are integrated into a texture atlas internally, and drawing operations are automatically performed in batch when possible.</p>
-    <p lang="ja">Ebiten の API はシンプルですが、ゲームは GPU を活かして高速に実行されます。複数の画像は内部でテクスチャアトラスにまとめられます。複数の描画命令は、可能な限り自動的にバッチにまとめられます。</p>
+    <p lang="ja">Ebiten の API はシンプルですが、ゲームは GPU を活かして高速に実行されます。複数の画像は内部でテクスチャアトラスにまとめられます。複数の描画命令は、可能な限り自動的にバッチにまとめられます。</p>rformed in batch when possible.</p>
+    <p lang="kr">Ebiten의 API는 심플하지만, GPU를 사용해 고성능으로 동작합니다. 여러 이미지들은 내부에서 텍스쳐 아틀라스로 정렬되며, 여러 렌더링 명령은 가능한 한 자동으로 배치에 정리됩니다.</p>
   </div>
   <div class="grid-item-2">
     <h3 lang="en">Production-Ready</h3>
     <h3 lang="ja">商用レベルのゲーム</h3>
+    <h3 lang="kr">프로덕션 수준의 게임</h3>
     <p class="img"><img src="images/productionready.png" width="448" height="224" alt="Production Ready"></p>
     <p lang="en">Ebiten has been used to develop production-level games. One such example is <a href="https://daigostudio.com/bearsrestaurant/">Bear's Restaurant</a>, a mobile application that has been downloaded over 1,000,000 times.</p>
     <p lang="ja">Ebiten は商用レベルのゲームを作ることができます。<a href="https://daigostudio.com/bearsrestaurant/">くまのレストラン</a>は、 100 万ダウンロードを達成した Ebiten 製のモバイルゲームです。</p>
+    <p lang="kr">Ebiten으로 프로덕션 수준의 게임을 개발할 수 있습니다. <a href="https://daigostudio.com/bearsrestaurant/">곰아저씨 레스토랑</a>은 100만 이상의 다운로드를 기록한 Ebiten 기반 모바일 게임입니다.</p>
   </div>
 </div>
 <h2 lang="en">Sponsors</h2>
 <h2 lang="ja">スポンサー</h2>
+<h2 lang="kr">스폰서</h2>
 <h3 lang="en">$125 / month</h3>
 <h3 lang="ja">$125 / 月</h3>
+<h3 lang="kr">$125 / 월</h3>
 <div class="grid-container">
   <div class="grid-item-1">
     <figure>
       <p class="img avatar"><img src="https://github.com/github.png?size=168" width="168"></p>
       <figcaption lang="en">(One private sponsor)</figcaption>
       <figcaption lang="ja">(プライベートスポンサー 1 名)</figcaption>
+      <figcaption lang="kr">(프라이빗 스폰서 1명)</figcaption>
     </figure>
   </div>
 </div>
 <h3 lang="en">$25 / month</h3>
 <h3 lang="ja">$25 / 月</h3>
+<h3 lang="kr">$25 / 월</h3>
 <div class="grid-container">
   <div class="grid-item-1">
     <figure>
       <p class="img avatar"><a href="https://github.com/pokemium"><img src="https://github.com/pokemium.png?size=168" width="168"></a></p>
       <figcaption lang="en"><a href="https://github.com/pokemium">Akatsuki</a></figcaption>
       <figcaption lang="ja"><a href="https://github.com/pokemium">Akatsuki さん</a></figcaption>
+      <figcaption lang="kr"><a href="https://github.com/pokemium">Akatsuki</a></figcaption>
     </figure>
   </div>
   <div class="grid-item-1">
@@ -158,6 +183,7 @@
       <p class="img avatar"><a href="https://github.com/Inkeliz"><img src="https://github.com/Inkeliz.png?size=168" width="168"></a></p>
       <figcaption lang="en"><a href="https://github.com/Inkeliz">Inkeliz</a></figcaption>
       <figcaption lang="ja"><a href="https://github.com/Inkeliz">Inkeliz さん</a></figcaption>
+      <figcaption lang="kr"><a href="https://github.com/Inkeliz">Inkeliz</a></figcaption>
     </figure>
   </div>
   <div class="grid-item-1">
@@ -165,6 +191,7 @@
       <p class="img avatar"><a href="https://github.com/silbinarywolf"><img src="https://github.com/silbinarywolf.png?size=168" width="168"></a></p>
       <figcaption lang="en"><a href="https://github.com/silbinarywolf">Jae Bentvelzen</a></figcaption>
       <figcaption lang="ja"><a href="https://github.com/silbinarywolf">Jae Bentvelzen さん</a></figcaption>
+      <figcaption lang="kr"><a href="https://github.com/silbinarywolf">Jae Bentvelzen</a></figcaption>
     </figure>
   </div>
   <div class="grid-item-1">
@@ -172,6 +199,7 @@
       <p class="img avatar"><img src="https://github.com/github.png?size=168" width="168"></p>
       <figcaption lang="en">(One private sponsor)</figcaption>
       <figcaption lang="ja">(プライベートスポンサー 1 名)</figcaption>
+      <figcaption lang="kr">(프라이빗 스폰서 1명)</figcaption>
     </figure>
   </div>
 </div>
@@ -180,10 +208,12 @@
 </p>
 <p lang="en">We appreciate all the sponsors!</p>
 <p lang="ja">すべてのスポンサーに感謝します!</p>
+<p lang="kr">스폰서를 환영합니다!</p>
 <div class="grid-container">
   <div class="grid-item-2">
     <h2 lang="en">Community</h2>
     <h2 lang="ja">コミュニティ</h2>
+    <h2 lang="kr">커뮤니티</h2>
     <ul class="toplinks">
       <li><img src="images/discord.png" width="16" height="16" alt="Discord" style="transform: scale(1.25, 1.25);"><a href="https://discord.gg/3tVdM5H8cC">Discord</a></li>
       <li><img src="images/slack.png" width="16" height="16" alt="Slack" style="transform: scale(2, 2);"><a href="https://gophers.slack.com/app_redirect?channel=ebiten">Slack #ebiten</a> (<a href="https://invite.slack.golangbridge.org/"><span lang="en">Join</span><span lang="ja">参加する</span></a>)</li>
@@ -194,12 +224,16 @@
   <div class="grid-item-2">
     <h2 lang="en">License</h2>
     <h2 lang="ja">ライセンス</h2>
+    <h2 lang="kr">라이선스</h2>
     <p lang="en">Ebiten is licensed under <a href="https://github.com/hajimehoshi/ebiten/blob/master/LICENSE">the Apache License 2.0</a>.</p>
     <p lang="ja">Ebiten は <a href="https://github.com/hajimehoshi/ebiten/blob/master/LICENSE">Apache License 2.0</a> で公開されています。</p>
+    <p lang="kr">Ebiten은 <a href="https://github.com/hajimehoshi/ebiten/blob/master/LICENSE">Apache License 2.0</a>으로 배포됩니다.</p>
     <p lang="en">Go Gopher by Renee French is licensed under <a href="https://creativecommons.org/licenses/by/3.0/">the Creative Commons Attribution 3.0 License</a>.</p>
     <p lang="ja">Go Gopher は Renee French 氏によって製作され、 <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> で公開されています。</p>
+    <p lang="kr">Go Gopher은 Renee French가 제작했고 <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>로 배포됩니다.</p>
     <p lang="en">Except as otherwise noted, the content of this site is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">the Creative Commons Attribution 4.0 License</a>.</p>
     <p lang="ja">明記されている場合を除き、このサイトのコンテンツは <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a> で公開されています。</p>
+    <p lang="kr">따로 명시된 경우를 제외하고, 이 사이트의 컨텐츠는 <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a>로 배포됩니다.</p>
   </div>
 </div>
 <script>
@@ -212,6 +246,8 @@
       <footer>
         <p lang="en">Feedback about this page? <a href="https://github.com/ebiten/ebiten.org/issues/new?body=https%3a%2f%2febiten.org%0a%0a">Please reach out on GitHub</a>. Thank you!</p>
         <p lang="ja">このページに何か問題がありましたら、<a href="https://github.com/ebiten/ebiten.org/issues/new?body=https%3a%2f%2febiten.org%0a%0a">GitHub にて報告</a>していただけると幸いです。</p>
+        <p lang="kr">이 페이지에 문제가 있나요? <a href="https://github.com/ebiten/ebiten.org/issues/new?body=https%3a%2f%2febiten.org%0a%0a">GitHub로 알려주세요.</a></p>
+        <p lang="kr">번역에 관련된 문제는 <a href="https://github.com/ybkimm/ebiten-docs-kr/issues/new?body=https%3a%2f%2febiten.org%0a%0a">이 링크를 통해 이슈 남겨주세요.</a></p>
       </footer>
     </main>
   </body>

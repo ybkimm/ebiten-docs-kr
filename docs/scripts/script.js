@@ -31,12 +31,13 @@ function defaultLanguage() {
     const threeToTwo = {
         'eng': 'en',
         'jpn': 'ja',
+        'kor': 'kr',
     };
     const lang = navigator.language.match(/^[a-zA-Z]{2,3}/)[0];
     if (lang.length === 3) {
         lang = threeToTwo[lang];
     }
-    if (new Set(['en', 'ja']).has(lang)) {
+    if (new Set(['en', 'ja', 'kr']).has(lang)) {
         return lang;
     }
     return 'en';
@@ -54,6 +55,7 @@ function languageName(code) {
     return {
         'en': 'English',
         'ja': '日本語',
+        'kr': '한국어',
     }[code];
 }
 
