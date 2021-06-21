@@ -118,34 +118,25 @@
     <main>
       <article>
         <h1 lang="en">Mobile</h1>
-<h1 lang="ja">Mobile</h1>
 <h1 lang="kr">모바일</h1>
 
 <h2 lang="en">TL;DR</h2>
-<h2 lang="ja">TL;DR</h2>
 <h2 lang="kr">2줄 요약</h2>
 <p lang="en">Use <code>ebitenmobile</code> command to create a shared library. The generated library includes a complete and easy-to-use view (or view controller) class.</p>
-<p lang="ja">Use <code>ebitenmobile</code> command to create a shared library. The generated library includes a complete and easy-to-use view (or view controller) class.</p>
 <p lang="kr"><code>ebitenmobile</code> 명령으로 동적 라이브러리를 생성할 수 있습니다. 생성된 라이브러리는 사용하기 쉬운 뷰(혹은 뷰 컨트롤러) 클래스를 포함합니다.</p>
 
 <h2 lang="en">Creating a shared library with <code>ebitenmobile bind</code></h2>
-<h2 lang="ja">Creating a shared library with <code>ebitenmobile bind</code></h2>
 <h2 lang="kr"><code>ebitenmobile bind</code>로 동적 라이브러리 만들기</h2>
 <h3 lang="en">Installing <code>ebitenmobile</code></h3>
-<h3 lang="ja">Installing <code>ebitenmobile</code></h3>
 <h3 lang="kr"><code>ebitenmobile</code> 설치</h3>
 <p lang="en">Install <code>ebitenmobile</code> command first.</p>
-<p lang="ja">Install <code>ebitenmobile</code> command first.</p>
 <p lang="kr"><code>ebitenmobile</code>을 먼저 설치해야 합니다.</p>
 <pre><code>go install github.com/hajimehoshi/ebiten/v2/cmd/ebitenmobile@latest</code></pre>
 <p lang="en">As <code>ebitenmobile</code> of Ebiten 1.10 cannot treat Go modules, your project also has to be under <code>GOPATH</code>.</p>
-<p lang="ja">As <code>ebitenmobile</code> of Ebiten 1.10 cannot treat Go modules, your project also has to be under <code>GOPATH</code>.</p>
 <p lang="kr">Ebiten 1.10의 <code>ebitenmobile</code>은 Go Modules을 다룰 수 없기 때문에, 프로젝트 역시 <code>GOPATH</code> 아래에 위치해야 합니다.</p>
 <h3 lang="en">Creating a binding</h3>
-<h3 lang="ja">Creating a binding</h3>
 <h3 lang="kr">바인딩 만들기</h3>
 <p lang="en">Create a package for mobiles to use <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile"><code>github.com/hajimehoshi/ebiten/v2/mobile</code></a>:</p>
-<p lang="ja">Create a package for mobiles to use <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile"><code>github.com/hajimehoshi/ebiten/v2/mobile</code></a>:</p>
 <p lang="kr">모바일에서 사용할 수 있는 패키지를 만들기 위해 <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile"><code>github.com/hajimehoshi/ebiten/v2/mobile</code></a>을 사용합니다.</p>
 <pre><code>package yourgamemobile
 
@@ -169,14 +160,11 @@ func init() {
 // Dummy forces gomobile to compile this package.
 func Dummy() {}</code></pre>
 <p lang="en">The key function is <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile#SetGame"><code>SetGame</code></a>. Do not call <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/#RunGame"><code>RunGame</code></a>, which you usually use for desktop games.</p>
-<p lang="ja">The key function is <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile#SetGame"><code>SetGame</code></a>. Do not call <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/#RunGame"><code>RunGame</code></a>, which you usually use for desktop games.</p>
 <p lang="kr">가장 중요한 함수는 <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/mobile#SetGame"><code>SetGame</code></a>입니다. 데스크탑에서 사용하는 <a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/#RunGame"><code>RunGame</code></a>은 사용하시면 안됩니다!</p>
 
 <h3 lang="en">Android</h3>
-<h3 lang="ja">Android</h3>
 <h3 lang="kr">안드로이드</h3>
 <p lang="en">Run <code>ebitenmobile bind</code> command for your package:</p>
-<p lang="ja">Run <code>ebitenmobile bind</code> command for your package:</p>
 <p lang="kr"><code>ebitenmobile bind</code> 명령을 실행해주세요.</p>
 <pre><code>cd /path/to/yourgame
 ebitenmobile bind -target android -javapkg your.package.name -o path/to/yourgame.aar .
@@ -186,10 +174,8 @@ ebitenmobile bind -target android -javapkg your.package.name -o path/to/yourgame
 # env GO111MODULE=off ebitenmobile bind -target android -javapkg your.package.name -o path/to/yourgame.aar \
 #   github.com/yourname/yourgame/yourgamemobile</code></pre>
 <p lang="en">Then your can get a <code>.aar</code> file. This <code>.aar</code> file defines a view class named <code>EbitenView</code> under the specified Java package (<code>-javapkg</code> option + your package name). You can put it on your screen. That's it!</p>
-<p lang="ja">Then your can get a <code>.aar</code> file. This <code>.aar</code> file defines a view class named <code>EbitenView</code> under the specified Java package (<code>-javapkg</code> option + your package name). You can put it on your screen. That's it!</p>
 <p lang="kr">그럼 <code>.aar</code> 파일이 만들어집니다. 이 <code>.aar</code> 파일은 지정한 자바 패키지(<code>-javapkg</code> 옵션으로 지정한 패키지 이름) 밑으로 <code>EbitenView</code>라는 이름의 뷰 클래스를 가지고 있습니다. 이 뷰를 화면에 띄우기만 하면 됩니다!</p>
 <p lang="en">The view class is defined like this:</p>
-<p lang="ja">The view class is defined like this:</p>
 <p lang="kr">뷰 클래는 아래처럼 정의되어 있습니다.</p>
 <pre><code>package your.package.name.yourgamemobile;
 
@@ -218,10 +204,8 @@ public class EbitenView extends ViewGroup {
 }</code></pre>
 
 <h3 lang="en">iOS</h3>
-<h3 lang="ja">iOS</h3>
 <h3 lang="kr">iOS</h3>
 <p lang="en">Run <code>ebitenmobile bind</code> command for your package:</p>
-<p lang="ja">Run <code>ebitenmobile bind</code> command for your package:</p>
 <p lang="kr"><code>ebitenmobile bind</code> 명령을 실행해주세요.</p>
 <pre><code>cd /path/to/yourgame
 ebitenmobile bind -target ios -o path/to/yourgame.framework .
@@ -231,10 +215,8 @@ ebitenmobile bind -target ios -o path/to/yourgame.framework .
 # env GO111MODULE=off ebitenmobile bind -target ios -o path/to/yourgame.framework \
 #   github.com/yourname/yourgame/yourgamemobile</code></pre>
 <p lang="en">Then your can get a <code>.framework</code> file. This <code>.framework</code> defines a view controller class named <code>(Package Name)EbitenViewController</code>. You can put it on your screen by connecting with any <code>UIView</code>. That's it!</p>
-<p lang="ja">Then your can get a <code>.framework</code> file. This <code>.framework</code> defines a view controller class named <code>(Package Name)EbitenViewController</code>. You can put it on your screen by connecting with any <code>UIView</code>. That's it!</p>
 <p lang="kr">그러면 <code>.framework</code> 파일이 생성됩니다. 이 <code>.framework</code> 파일은 <code>(Package Name)EbitenViewController</code>라는 이름의 뷰 컨트롤러 클래스를 가지고 있습니다. <code>UIView</code>와 연결해서 화면에 띄우기만 하면 됩니다!</p>
 <p lang="en">The view controller class is defined like this:</p>
-<p lang="ja">The view controller class is defined like this:</p>
 <p lang="kr">뷰 컨트롤러 클래스는 아래처럼 정의되어 있습니다.</p>
 <pre><code>#import &lt;UIKit/UIKit.h&gt;
 
@@ -257,20 +239,16 @@ ebitenmobile bind -target ios -o path/to/yourgame.framework .
 @end</code></pre>
 
 <h3 lang="en">Example</h3>
-<h3 lang="ja">Example</h3>
 <h3 lang="kr">예제</h3>
 <p lang="en"><a href="https://github.com/hajimehoshi/go-inovation">go-inovation</a> is a complete example to use <code>ebitenmobile bind</code>.</p>
-<p lang="ja"><a href="https://github.com/hajimehoshi/go-inovation">go-inovation</a> is a complete example to use <code>ebitenmobile bind</code>.</p>
 <p lang="kr"><a href="https://github.com/hajimehoshi/go-inovation">go-inovation</a>은 <code>ebitenmobile bind</code>를 사용하는 예제 프로젝트입니다.</p>
 
 <h3 lang="en">Why <code>ebitenmobile bind</code>?</h3>
-<h3 lang="ja">Why <code>ebitenmobile bind</code>?</h3>
 <h3 lang="kr"><code>ebitenmobile bind</code>를 쓰는 이유가 뭔가요?</h3>
 <ul lang="en">
   <li><code>ebitenmobile bind</code> requires less boilerplate code than <code>gomobile bind</code>.</li>
   <li><code>ebitenmobile bind</code>'s views hide implementation details completely. Now Android uses OpenGL ES and iOS uses Metal, and this fact is hid by <code>ebitenmobile</code>. Android might migrate to Vulkan in the future. Even when migration happens, you don't have to care anything as long as you use <code>ebitenmobile bind</code>.</li>
 </ul>
-<ul lang="ja">
   <li><code>ebitenmobile bind</code> requires less boilerplate code than <code>gomobile bind</code>.</li>
   <li><code>ebitenmobile bind</code>'s views hide implementation details completely. Now Android uses OpenGL ES and iOS uses Metal, and this fact is hid by <code>ebitenmobile</code>. Android might migrate to Vulkan in the future. Even when migration happens, you don't have to care anything as long as you use <code>ebitenmobile bind</code>.</li>
 </ul>
@@ -280,17 +258,14 @@ ebitenmobile bind -target ios -o path/to/yourgame.framework .
 </ul>
     
 <h3 lang="en">Why not a complete application instead of a shared library?</h3>
-<h3 lang="ja">Why not a complete application instead of a shared library?</h3>
 <h3 lang="kr">왜 완전한 애플리케이션이 아니라 동적 라이브러리를 만들어주나요?</h3>
 <p lang="en"> It is because it is not feasible to write a mobile application only in Go yet.</p>
-<p lang="ja"> It is because it is not feasible to write a mobile application only in Go yet.</p>
 <p lang="kr"> 아직은 Go만 사용해서 애플리케이션을 빌드할 수가 없기 때문입니다.</p>
 <ul lang="en">
   <li>You'd need to access native APIs to access many features.</li>
   <li>It is very common to add a native component (e.g., ad banners) to your application.</li>
   <li>To launch your application on the stores, you'd need to insert certifications or other files. Android Studio or Xcode care them. It'd be really hard for the IDEs to treat a complete application generated by other tools.</li>
 </ul>
-<ul lang="ja">
   <li>You'd need to access native APIs to access many features.</li>
   <li>It is very common to add a native component (e.g., ad banners) to your application.</li>
   <li>To launch your application on the stores, you'd need to insert certifications or other files. Android Studio or Xcode care them. It'd be really hard for the IDEs to treat a complete application generated by other tools.</li>
@@ -302,31 +277,23 @@ ebitenmobile bind -target ios -o path/to/yourgame.framework .
 </ul>
 
 <h2 lang="en">Creating an application with <code>gomobile build</code> (For testing only)</h2>
-<h2 lang="ja">Creating an application with <code>gomobile build</code> (For testing only)</h2>
 <h2 lang="kr"><code>gomobile build</code>로 애플리케이션 만들기 (테스트 전용)</h2>
 <p lang="en">NOTICE: Now <code>gomobile build</code> does not work for iOS. See <a href="https://github.com/golang/go/issues/32963">the Go issue</a>.</p>
-<p lang="ja">NOTICE: Now <code>gomobile build</code> does not work for iOS. See <a href="https://github.com/golang/go/issues/32963">the Go issue</a>.</p>
 <p lang="kr">NOTICE: <code>gomobile build</code>는 iOS에서 동작하지 않습니다. <a href="https://github.com/golang/go/issues/32963">Go 이슈</a>를 확인하세요.</p>
 <p lang="en">Ebiten application also works with <code>gomobile build</code>. This is useful for testing, but not suitable for actual applications in the stores.</p>
-<p lang="ja">Ebiten application also works with <code>gomobile build</code>. This is useful for testing, but not suitable for actual applications in the stores.</p>
 <p lang="kr">Ebiten 애플리케이션을 빌드하기 위해 <code>gomobile build</code>를 사용할 수도 있습니다. 테스트에 유용하긴 하지만 스토어에 배포할 프로덕션 애플리케이션에 적합한 방법은 아닙니다.</p>
 <p lang="en">Install <code>gomobile</code> command first.</p>
-<p lang="ja">Install <code>gomobile</code> command first.</p>
 <p lang="kr">우선 <code>gomobile</code>을 설치해야 합니다.</p>
 <pre><code>go install golang.org/x/mobile/cmd/...@latest</code></pre>
 <p lang="en">Then, run <code>gomobile build</code></p>
-<p lang="ja">Then, run <code>gomobile build</code></p>
 <p lang="kr">그리고, <code>gomobile build</code>를 실행합니다.</p>
 <pre><code>gomobile build github.com/yourname/yourpackage</code></pre>
 <p lang="en">That's it!</p>
-<p lang="ja">That's it!</p>
 <p lang="kr">이게 전부입니다!</p>
 <p lang="en">You can install an Ebiten's example directly with <code>gomobile install</code> on your Android device:</p>
-<p lang="ja">You can install an Ebiten's example directly with <code>gomobile install</code> on your Android device:</p>
 <p lang="kr">다음 명령으로 Ebiten의 예제들을 안드로이드 디바이스에 설치할 수 있습니다.</p>
 <pre><code>gomobile install -tags=example github.com/hajimehoshi/ebiten/v2/examples/paint</code></pre>
 <p lang="en">For more details, see <a href="https://github.com/golang/go/wiki/Mobile">the official Wiki page about gomobile</a>.</p>
-<p lang="ja">For more details, see <a href="https://github.com/golang/go/wiki/Mobile">the official Wiki page about gomobile</a>.</p>
 <p lang="kr">자세한 내용은 <a href="https://github.com/golang/go/wiki/Mobile">gomobile에 대한 공식 위키 페이지를 참고하세요.</a></p>
 
       </article>

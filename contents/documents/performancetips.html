@@ -1,52 +1,44 @@
 <h1 lang="en">Performance Tips</h1>
-<h1 lang="ja">Performance Tips</h1>
 <h1 lang="kr">퍼포먼스 팁</h1>
 <h2 lang="en">Make similar draw function calls successive</h2>
-<h2 lang="ja">Make similar draw function calls successive</h2>
 <h2 lang="kr">유사한 Draw 함수는 연속적으로 호출할 것</h2>
 <p lang="en">The less draw commands, the better the performance is.</p>
-<p lang="ja">The less draw commands, the better the performance is.</p>
 <p lang="kr">더 적은 Draw 명령은 더 나은 성능을 보입니다.</p>
 <p lang="en">One drawing function like <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawImage">DrawImage</a></code> or <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.Fill">Fill</a></code> is usually treated as one (internal) draw command, but there is an exception. Successive drawing commands are treated as one draw command when all the below conditions are satisfied:</p>
-<p lang="ja">One drawing function like <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawImage">DrawImage</a></code> or <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.Fill">Fill</a></code> is usually treated as one (internal) draw command, but there is an exception. Successive drawing commands are treated as one draw command when all the below conditions are satisfied:</p>
 <p lang="kr"><code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawImage">DrawImage</a></code>나 <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.Fill">Fill</a></code>같은 Draw 함수는 사실 (내부적으로) 한 개의 Draw 명령으로 취급합니다. 하지만 예외가 있습니다. 아래 조건이 모두 충족되면 연속 그리기 명령은 하나의 그리기 명령으로 처리됩니다.</p>
 <ul>
   <li lang="en">All the functions are <code>DrawImage</code> or <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawTriangles">DrawTriangles</a></code></li>
-  <li lang="ja">All the functions are <code>DrawImage</code> or <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawTriangles">DrawTriangles</a></code></li>
+
   <li lang="kr">모든 함수가 <code>DrawImage</code>이거나 <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#Image.DrawTriangles">DrawTriangles</a>일 것</code></li>
   <li lang="en">All the render targets are same (<code>A</code> in <code>A.DrawImage(B, op)</code>)</li>
-  <li lang="ja">All the render targets are same (<code>A</code> in <code>A.DrawImage(B, op)</code>)</li>
+
   <li lang="kr">모든 렌더 타겟이 같을 것 (<code>A.DrawImage(B, op)</code>의 A)</li>
   <li lang="en">Either all ColorM element values are same or all the ColorM have only diagonal ('scale') elements
-  <li lang="ja">Either all ColorM element values are same or all the ColorM have only diagonal ('scale') elements
+
   <li lang="kr">모든 ColorM 요소 값이 동일하거나 모든 ColorM에 diagonal ('scale') 요소만 존재할 것
     <ul>
       <li lang="en">If only <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#ColorM.Scale">(*ColorM).Scale</a></code> is applied to a ColorM, the ColorM has only diagonal elements. The other ColorM functions might modify the other elements.</li>
-      <li lang="ja">If only <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#ColorM.Scale">(*ColorM).Scale</a></code> is applied to a ColorM, the ColorM has only diagonal elements. The other ColorM functions might modify the other elements.</li>
+    
       <li lang="kr"><code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2#ColorM.Scale">(*ColorM).Scale</a></code>가 ColorM에만 적용되면, ColorM은 diagonal elements만 가지게 됩니다. 다른 ColorM 함수는 다른 개체를 수정할 수 있습니다.</li>
     </ul>
   </li>
   <li lang="en">All the composite modes are same</li>
-  <li lang="ja">All the composite modes are same</li>
+
   <li lang="kr">Composite 모드가 동일할 것</li>
   <li lang="en">All the filter values are same</li>
-  <li lang="ja">All the filter values are same</li>
+
   <li lang="kr">Filter 값이 동일할 것</li>
   <li lang="en">All the address values are same (only for <code>DrawTriangles</code>)</li>
-  <li lang="ja">All the address values are same (only for <code>DrawTriangles</code>)</li>
+
   <li lang="kr">Address 값이 동일할 것 (<code>DrawTriangles</code>)</li>
 </ul>
 <p lang="en">Even when all the above conditions are satisfied, multiple draw commands can be used in really rare cases. Ebiten images usually share an internal automatic texture atlas, but when you consume the atlas, or you create a huge image, those images cannot be on the same texture atlas. In this case, draw commands are separated. The texture atlas size is 4096x4096 so far. Another case is when you use an offscreen as a render source. An offscreen doesn't share the texture atlas with high probability.</p>
-<p lang="ja">Even when all the above conditions are satisfied, multiple draw commands can be used in really rare cases. Ebiten images usually share an internal automatic texture atlas, but when you consume the atlas, or you create a huge image, those images cannot be on the same texture atlas. In this case, draw commands are separated. The texture atlas size is 4096x4096 so far. Another case is when you use an offscreen as a render source. An offscreen doesn't share the texture atlas with high probability.</p>
 <p lang="kr">위의 모든 조건이 충족 되더라도 매우 드문 경우에 여러 그리기 명령을 사용할 수 있습니다. Ebiten 이미지는 일반적으로 내부 자동 텍스처 아틀라스를 공유하지만 아틀라스를 사용하거나 거대한 이미지를 만들 때 이러한 이미지는 동일한 텍스처 아틀라스에있을 수 없습니다. 이 경우 그리기 명령이 분리됩니다. 지금까지 텍스처 아틀라스 크기는 4096x4096입니다. 또 다른 경우는 오프 스크린을 렌더 소스로 사용하는 경우입니다. 오프 스크린은 높은 확률로 텍스처 아틀라스를 공유하지 않습니다.</p>
 <p lang="en">examples/sprites is a good example to draw > 10000 sprites with one (or a few) draw command(s).</p>
-<p lang="ja">examples/sprites is a good example to draw > 10000 sprites with one (or a few) draw command(s).</p>
 <p lang="kr">examples/sprites 는 10000개 이상의 Sprites를 한 개의 Draw 명령(혹은 적은 수의 Draw 명령)으로 처리하는 좋은 예시입니다.</p>
 <h2 lang="en">Know the actual drawing commands with <code>ebitendebug</code> build tag</h2>
-<h2 lang="ja">Know the actual drawing commands with <code>ebitendebug</code> build tag</h2>
 <h2 lang="kr">실제 어떻게 그려지는지 <code>ebitendebug</code> build tag로 확인해보기</h2>
 <p lang="en">To see actual drawing commands, you can use <code>ebitendebug</code> build tag. For example, if you execute <code>blocks</code> example, you will see the below logs:</p>
-<p lang="ja">To see actual drawing commands, you can use <code>ebitendebug</code> build tag. For example, if you execute <code>blocks</code> example, you will see the below logs:</p>
 <p lang="kr">실제 Draw 명령을 확인해보고 싶다면, <code>ebitendebug</code> build tag를 사용하세요. 예를 들어, <code>blocks</code> 예시를 실행하면 아래와 같은 로그를 확인할 수 있습니다.</p>
 <pre><code>go run -tags=example,ebitendebug github.com/hajimehoshi/ebiten/v2/examples/blocks</code></pre>
 <pre><code>...
@@ -73,41 +65,30 @@ draw-triangles: dst: 8 (screen) <- src: 7, colorm: &lt;nil&gt;, mode copy, filte
 --
 ...</code></pre>
 <h2 lang="en">Avoid changing render sources&apos; pixels</h2>
-<h2 lang="ja">Avoid changing render sources&apos; pixels</h2>
 <h2 lang="kr">렌더 소스의 픽셀을 변경하지 말 것</h2>
 <p lang="en">Ebiten records almost all draw functions in order to restore when context lost happens. When a render source&apos;s pixel is changed after it is used as a render source, Ebiten tries a complicated calculation for restoring.</p>
-<p lang="ja">Ebiten records almost all draw functions in order to restore when context lost happens. When a render source&apos;s pixel is changed after it is used as a render source, Ebiten tries a complicated calculation for restoring.</p>
 <p lang="kr">Ebiten은 컨텍스트 손실이 발생했을 때 복원하기 위해 거의 모든 Draw 함수를 기록합니다. 렌더 소스의 픽셀이 렌더 소스로 사용 된 후 변경되면 Ebiten은 복원을 위해 복잡한 계산을 시도합니다.</p>
 <pre><code>A.DrawImage(B, op) // B is a render source
 B.DrawImage(C, op) // tries to change B&apos;s pixels. Avoid this if possible.</code></pre>
 <p lang="en">As well, cyclic drawing should also be avoided.</p>
-<p lang="ja">As well, cyclic drawing should also be avoided.</p>
 <p lang="kr">같은 이유로, 재귀 참조 역시 피해야 합니다.</p>
 <pre><code>A.DrawImage(B, op)
 B.DrawImage(A, op) // cyclic drawing! Avoid this if possible.</code></pre>
 <h2 lang="en">Avoid using the screen as a render source</h2>
-<h2 lang="ja">Avoid using the screen as a render source</h2>
 <h2 lang="kr">스크린을 렌더 소스로 사용하지 말 것</h2>
 <p lang="en">The screen is a special image because the image is cleared at every frame. As explained above, Ebiten records a drawing function calls but using the screen as a render source makes the calculation complicated.</p>
-<p lang="ja">The screen is a special image because the image is cleared at every frame. As explained above, Ebiten records a drawing function calls but using the screen as a render source makes the calculation complicated.</p>
 <p lang="kr">Screen은 매 프레임마다 초기화되는 특수한 이미지입니다. 위에서 설명한대로, Ebiten은 Draw 함수 콜을 기록하는데 스크린을 렌더 소스로 사용하게 되면 복잡한 계산이 이뤄지게 됩니다.</p>
 <h2 lang="en">Don&apos;t call <code>(*Image).ReplacePixels</code> too much</h2>
-<h2 lang="ja">Don&apos;t call <code>(*Image).ReplacePixels</code> too much</h2>
 <h2 lang="kr"><code>(*Image).ReplacePixels</code>를 남용하지 말 것</h2>
 <p lang="en">ReplacePixels is a relatively heavy function.</p>
-<p lang="ja">ReplacePixels is a relatively heavy function.</p>
 <p lang="kr">ReplacePixels은 상대적으로 무거운 함수입니다.</p>
 <h2 lang="en">Don&apos;t call <code>(*Image).At</code> too much</h2>
-<h2 lang="ja">Don&apos;t call <code>(*Image).At</code> too much</h2>
 <h2 lang="kr"><code>(*Image).At</code>을 자주 호출하지 말 것</h2>
 <p lang="en">At is also heavy that tries to solve all the queued draw commands and retrieve pixels from GPU.</p>
-<p lang="ja">At is also heavy that tries to solve all the queued draw commands and retrieve pixels from GPU.</p>
 <p lang="kr">모든 Draw 명령을 처리하고 GPU에서 픽셀을 가져오는 작업이 필요하기 때문에, 이 역시 무거운 함수중 하나입니다.</p>
 <h2 lang="en">It is fine to create one player for one short sound effect</h2>
-<h2 lang="ja">It is fine to create one player for one short sound effect</h2>
 <h2 lang="kr">한 개의 SE당 한 개의 플레이어를 생성해도 됩니다</h2>
 <p lang="en">Creating an <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player">audio.Player</a></code> is not expensive. It is fine to create one player for one short sound effect. For example, this code is totally fine:</p>
-<p lang="ja">Creating an <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player">audio.Player</a></code> is not expensive. It is fine to create one player for one short sound effect. For example, this code is totally fine:</p>
 <p lang="kr"><code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player">audio.Player</a></code>를 만드는데는 높은 비용이 필요하지 않습니다. 한 개의 짧은 음향 효과를 재생하기 위해 한 개의 플레이어를 생성해도 됩니다. 즉, 아래 코드처럼 써도 됩니다.</p>
 <pre lang="en"><code>// PlaySE plays a sound effect.
 func PlaySE(bs []byte) {
@@ -115,7 +96,6 @@ func PlaySE(bs []byte) {
     // sePlayer is never GCed as long as it plays.
     sePlayer.Play()
 }</code></pre>
-<pre lang="ja"><code>// PlaySE plays a sound effect.
 func PlaySE(bs []byte) {
     sePlayer := audio.NewPlayerFromBytes(audioContext, bs)
     // sePlayer is never GCed as long as it plays.
@@ -128,17 +108,12 @@ func PlaySE(bs []byte) {
       sePlayer.Play()
   }</code></pre>
 <p lang="en">In this code, <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayerFromBytes">audio.NewPlayerFromBytes</a></code> is used instead of <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayer">audio.NewPlayer</a></code>. <code>audio.NewPlayerFromBytes</code> creates a new stream on call, while <code>audio.NewPlayer</code> accepts an existing stream. As a stream has a byte data and its position, one stream cannot be shared by multiple players. With <code>NewPlayerFromBytes</code>, you can play sounds effects regardless of whether the same sound is playing or not.</p>
-<p lang="ja">In this code, <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayerFromBytes">audio.NewPlayerFromBytes</a></code> is used instead of <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayer">audio.NewPlayer</a></code>. <code>audio.NewPlayerFromBytes</code> creates a new stream on call, while <code>audio.NewPlayer</code> accepts an existing stream. As a stream has a byte data and its position, one stream cannot be shared by multiple players. With <code>NewPlayerFromBytes</code>, you can play sounds effects regardless of whether the same sound is playing or not.</p>
 <p lang="kr">이 코드에서는 <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayer">audio.NewPlayer</a></code> 대신 <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#NewPlayerFromBytes">audio.NewPlayerFromBytes</a></code>가 사용됐습니다. <code>audio.NewPlayer</code>가 기존에 존재하던 Stream을 받는것과 다르게 <code>audio.NewPlayerFromBytes</code>는 호출될 때 새 Stream을 생성합니다. Stream이 바이트 데이터와 위치를 가지기 때문에, 하나의 Stream은 다수의 Player에 공유할 수 없습니다. <code>NewPlayerFromBytes</code>를 사용하면 이미 같은 사운드가 재생되고 있다고 하더라도 상관 없이 재생됩니다.</p>
 <p lang="en">As for BGMs that bytes can be much bigger than SEs, it is recommended to reuse one <code>audio.Player</code> by, e.g., <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player.Rewind">(*audio.Player).Rewind</a></code>. It is because preparing a byte slice for the whole music at one time might be expensive. It should be rare to play the same BGM at the same time anyway.</p>
-<p lang="ja">As for BGMs that bytes can be much bigger than SEs, it is recommended to reuse one <code>audio.Player</code> by, e.g., <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player.Rewind">(*audio.Player).Rewind</a></code>. It is because preparing a byte slice for the whole music at one time might be expensive. It should be rare to play the same BGM at the same time anyway.</p>
 <p lang="kr">BGM은 SE보다 훨씬 큰 용량을 가지고 있을테니, <code>audio.Player</code>를 재사용하는게 권장됩니다. <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player.Rewind">(*audio.Player).Rewind</a></code> 함수를 사용할 수 있습니다. 이렇게 하는 이유는 한 음악 전체에 byte 슬라이스를 생성하는 작업이 비쌀 수 있기 때문입니다. 물론 같은 BGM을 동시에 재생할 일이 없기 때문이기도 하죠.</p>
 <h2 lang="en">Encourage using the discrete GPU on Windows</h2>
-<h2 lang="ja">Encourage using the discrete GPU on Windows</h2>
 <h2 lang="kr">Windows에서 Discrete GPU를 사용하는 것을 권장합니다</h2>
 <p lang="en">On Windows, you can encourage your application to use the discrete GPU instead of the integrated GPU by exporting some symbols: <code>NvOptimusEnablement</code> and <code>AmdPowerXpressRequestHighPerformance</code>. This requires <a href="https://golang.org/cmd/cgo/">Cgo</a> unfortunately, then Ebiten does not do this by default.</p>
-<p lang="ja">On Windows, you can encourage your application to use the discrete GPU instead of the integrated GPU by exporting some symbols: <code>NvOptimusEnablement</code> and <code>AmdPowerXpressRequestHighPerformance</code>. This requires <a href="https://golang.org/cmd/cgo/">Cgo</a> unfortunately, then Ebiten does not do this by default.</p>
 <p lang="kr">윈도우에서, NvOptimusEnablement 및 AmdPowerXpressRequest 같은 심볼을 Export 해서 애플리케이션이 Itegrated GPU 대신 Discrete GPU를 사용하도록 권장할 수 있습니다.고성능. 이 경우 불행히도 <a href="https://golang.org/cmd/cgo/">Cgo</a>가 필요하며, Ebiten은 기본적으로 이 작업을 수행하지 않습니다.</p>
 <p lang="en"><a href="https://github.com/silbinarywolf/preferdiscretegpu">Jae&apos;s preferdiscretegpu</a> is a nice package to enable this very easily.</p>
-<p lang="ja"><a href="https://github.com/silbinarywolf/preferdiscretegpu">Jae&apos;s preferdiscretegpu</a> is a nice package to enable this very easily.</p>
 <p lang="kr"><a href="https://github.com/silbinarywolf/preferdiscretegpu">Jae님이 개발한 preferdiscretegpu</a>는 이를 손쉽게 활성화 해줍니다.</p>

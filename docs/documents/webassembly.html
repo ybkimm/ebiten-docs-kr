@@ -118,38 +118,28 @@
     <main>
       <article>
         <h1 lang="en">WebAssembly</h1>
-<h1 lang="ja">WebAssembly</h1>
 <h1 lang="kr">WebAssembly</h1>
 <h2 lang="en">Option 1. WasmServe</h2>
-<h2 lang="ja">Option 1. WasmServe</h2>
 <h2 lang="kr">Option 1. WasmServe</h2>
 <p lang="en">If you want to see your game working on browsers, <a href="https://github.com/hajimehoshi/wasmserve">wasmserve</a> is the easiest way.</p>
-<p lang="ja">If you want to see your game working on browsers, <a href="https://github.com/hajimehoshi/wasmserve">wasmserve</a> is the easiest way.</p>
 <p lang="kr">브라우저에서 게임이 동작하는지 확인하는게 목적이라면 <a href="https://github.com/hajimehoshi/wasmserve">wasmserve</a>가 가장 간단한 방법입니다.</p>
 <pre><code>go install github.com/hajimehoshi/wasmserve@latest
 wasmserve ./path/to/yourgame</code></pre>
 <p lang="en">Then access <code>http://localhost:8080/</code>.</p>
-<p lang="ja">Then access <code>http://localhost:8080/</code>.</p>
 <p lang="kr">그리고 <code>http://localhost:8080/</code>에 접속합니다.</p>
 <h2 lang="en">Option 2. Compiling by yourself</h2>
-<h2 lang="ja">Option 2. Compiling by yourself</h2>
 <h2 lang="kr">Option 2. 직접 컴파일하기</h2>
 <p lang="en">If you want to publish your game, you'd need to compile your game by yourself.</p>
-<p lang="ja">If you want to publish your game, you'd need to compile your game by yourself.</p>
 <p lang="kr">게임을 배포하려면 직접 컴파일 해야 합니다.</p>
 <h3 lang="en">Compiling your game</h3>
-<h3 lang="ja">Compiling your game</h3>
 <h3 lang="kr">게임 컴파일하기</h3>
 <pre><code>GOOS=js GOARCH=wasm go build -o yourgame.wasm github.com/yourname/yourgame</code></pre>
 <h3 lang="en">Copying <code>wasm_exec.js</code> to execute the Wasm binary</pre></h3>
-<h3 lang="ja">Copying <code>wasm_exec.js</code> to execute the Wasm binary</pre></h3>
 <h3 lang="kr">WASM 바이너리를 실행하기 위한 <code>wasm_exec.js</code> 복사해오기</pre></h3>
 <pre><code>cp $(go env GOROOT)/misc/wasm/wasm_exec.js .</code></pre>
 <h3 lang="en">Creating an HTML</h3>
-<h3 lang="ja">Creating an HTML</h3>
 <h3 lang="kr">HTML 만들기</h3>
 <p lang="en">Create this HTML:</p>
-<p lang="ja">Create this HTML:</p>
 <p lang="kr">아래 HTML 파일을 복사해주세요.</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;script src="wasm_exec.js"&gt;&lt;/script&gt;
@@ -168,21 +158,16 @@ WebAssembly.instantiateStreaming(fetch("yourgame.wasm"), go.importObject).then(r
 });
 &lt;/script&gt;</code></pre>
 <p lang="en">Then open this HTML in your browser. You might need a local HTTP server.</p>
-<p lang="ja">Then open this HTML in your browser. You might need a local HTTP server.</p>
 <p lang="kr">그리고 브라우저로 열어줍니다. 아마 로컬 서버가 필요할겁니다.</p>
 <p lang="en">If you want to embed your game into your web page, using iframe is strongly recommended. The screen scale is automatically adjusted. If the above HTML&apos;s name is <code>main.html</code>, the host HTML will be like this:</p>
-<p lang="ja">If you want to embed your game into your web page, using iframe is strongly recommended. The screen scale is automatically adjusted. If the above HTML&apos;s name is <code>main.html</code>, the host HTML will be like this:</p>
 <p lang="kr">웹페이지에 게임을 임베딩 하고 싶다면, iframe을 사용하길 강력하게 권해드립니다. 화면 크기는 자동으로 조절됩니다. 만약 위 HTML 파일의 이름이 <code>main.html</code>이라면, 호스트 HTML 파일은 아래처럼 생겼을겁니다.</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;iframe src="main.html" width="640" height="480"&gt;&lt;/iframe&gt;</code></pre>
 <p lang="en">You might find this message with Chrome:</p>
-<p lang="ja">You might find this message with Chrome:</p>
 <p lang="kr">크롬에서 실행한다면 이런 오류를 볼 수도 있습니다.</p>
 <pre lang="en">The AudioContext was not allowed to start. It must be resume (or created) after a user gesture on the page. https://goo.gl/7K7WLu</pre>
-<pre lang="ja">The AudioContext was not allowed to start. It must be resume (or created) after a user gesture on the page. https://goo.gl/7K7WLu</pre>
 <pre lang="kr">The AudioContext was not allowed to start. It must be resume (or created) after a user gesture on the page. https://goo.gl/7K7WLu</pre>
 <p lang="en">In this case, you can solve this by putting <code>allow="autoplay"</code> on the iframe.</p>
-<p lang="ja">In this case, you can solve this by putting <code>allow="autoplay"</code> on the iframe.</p>
 <p lang="kr">단순히 <code>allow="autoplay"</code>를 iframe에 추가하면 해결할 수 있습니다.</p>
 
       </article>
