@@ -1,20 +1,28 @@
 <h1 lang="en">Shader</h1>
 <h1 lang="ja">シェーダー</h1>
+<h1 lang="kr">쉐이더</h1>
 <p lang="en">As of 1.12.0, Ebiten has APIs to render custom shaders. This document explains how to use custom shaders.</p>
 <p lang="ja">バージョン 1.12.0 から、カスタムシェーダを描画する API が Ebiten に入りました。このドキュメントでは、カスタムシェーダの使い方について説明します。</p>
+<p lang="kr">버전 1.12.0부터, 커스텀 쉐이더 API가 Ebiten에 추가되었습니다. 이 문서에서는 커스텀 쉐이더를 사용하는 방법에 대해 설명합니다.</p>
 <h2 lang="en">What's a shader?</h2>
 <h2 lang="ja">シェーダとは</h2>
+<h2 lang="kr">쉐이더에 대해</h2>
 <p lang="en">A shader is a program executed on GPU. A custom shader is a shader an Ebiten user can write. With shaders, you can execute a complex rendering on GPU efficiently.</p>
 <p lang="ja">シェーダは GPU 上で実行されるプログラムです。カスタムシェーダは Ebiten ユーザーが記述できるシェーダです。シェーダを使うことで、複雑な描画が GPU 上で効率的にできるようになります。</p>
+<p lang="kr">쉐이더는 GPU 위에서 작동하는 프로그램입니다. 커스텀 쉐이더는 Ebiten 유저가 작성한 쉐이더입니다. 쉐이더를 사용하면 복잡한 렌더링을 GPU로 처리하는 게 가능해집니다.</p>
 <p lang="en">In Ebiten, you can write a 'fragment shader'. A fragment shader is a shader executed on each pixel. Roughly speaking, this is a function to calculate a color for each pixel. This color calculation is executed on GPU in parallel.</p>
 <p lang="ja">Ebiten はシェーダのうちフラグメントシェーダと呼ばれるものが記述できます。フラグメントシェーダはピクセルごとに実行されるシェーダです。大雑把に言うと、ピクセルごとに色を計算する関数です。この色の計算が、 GPU 上で並列に走ります。</p>
+<p lang="kr">Ebiten에서는 쉐이더중에서도 Fragment Shader라고 부르는 쉐이더를 작성할 수 있습니다. Fragment 쉐이더는 각 픽셀에 대해 실행되는 쉐이더입니다. 대략적으로 말해서, 픽셀의 색을 계산하는게 가능합니다. 이런 계산은 GPU위에서 병렬 실행됩니다.</p>
 <p lang="en">With shaders, you can execute various effects like lighting or blur. For an example, see <code>examples/shader</code>.</p>
 <p lang="ja">シェーダを使うことでライティング、ブラーなどの様々な効果が実現できます。サンプルについては <code>examples/shader</code> を参照してください。</p>
+<p lang="kr">쉐이더를 사용하여 라이팅이나 블러같은 여러 효과를 적용할 수 있습니다. <code>examples/shader</code>에 예제가 있으니 참고하세요.</p>
 <pre><code>go run -tags=example github.com/hajimehoshi/ebiten/v2/examples/shader</code></pre>
 <p lang="en">Ebiten adopts an original shading language 'Kage'. This has a compatible syntax with Go, but the details are different. Kage has high portability. Ebiten uses graphics libraries like OpenGL or Metal and this depends on environments, but Kage is compiled on the fly so that this works equally everywhere.</p>
 <p lang="ja">Ebiten はシェーディング言語として Kage という独自言語を採用しています。これは Go 互換の文法を持ちますが、細部が Go とは異なります。 Kage は高いポータビリティを持ちます。 Ebiten は環境によって OpenGL や Metal などをグラフィックスライブラリとして使いますが、 Kage はどの環境でも同様に動くように、動的にコンパイルされます。</p>
+<p lang="kr">Ebiten은 쉐이딩 언어로 Kage라는 독자적인 언어를 사용합니다. Go와 비슷한 문법을 가지고 있지만 약간 다릅니다. Kage는 높은 호환성을 가집니다. Ebiten은 환경에 따라서 OpenGL이나 Metal같은 그래픽 라이브러리를 사용하는데, Kage는 어떤 환경에서도 동일하게 실행되도록 동적으로 컴파일 됩니다.</p>
 <h2 lang="en">Example</h2>
 <h2 lang="ja">例</h2>
+<h2 lang="kr">예제</h2>
 <div class="grid-container">
   <div class="grid-item-2">
     <pre><code>package main
@@ -45,16 +53,20 @@ func Fragment(position vec4, texCoord vec2, color vec4) vec4 {
 </div>
 <h2 lang="en">Ebiten API</h2>
 <h2 lang="ja">Ebiten API</h2>
+<h2 lang="kr">Ebiten API</h2>
 <h3><code>NewShader</code></h3>
 <pre><code>func NewShader(src []byte) (*Shader, error)</code></pre>
 <p lang="en"><code>NewShader</code> compiles a shader program in the shading language Kage, and returns the result.</p>
 <p lang="ja"><code>NewShader</code> はシェーディング言語 Kage で記述されたシェーダプログラムをコンパイルし、結果を返します。</p>
+<p lang="kr"><code>NewShader</code>는 쉐이딩 언어 Kage로 작성된 쉐이딩 프로그램을 컴파일하고, 그 결과를 반환합니다.</p>
 <p lang="en">If the compilation fails, <code>NewShader</code> returns an error.</p>
 <p lang="ja">もしコンパイルエラーが起きたならば、 <code>NewShader</code> はエラーを返します。</p>
+<p lang="kr">컴파일에 실패하는 경우 <code>NewShader</code>는 오류를 반환합니다.</p>
 <h3><code>(*Image).DrawRectShader</code></h3>
 <pre><code>func DrawRectShader(width, height int, shader *Shader, options *DrawRectShaderOptions)</code></pre>
 <p lang="en"><code>DrawRectShader</code> draws a rectangle with the specified width and height with the specified shader.</p>
 <p lang="ja"><code>DrawRectShader</code> は指定された幅と高さ、指定されたシェーダを使って矩形を描画します。</p>
+<p lang="kr"><code>DrawRectShader</code>는 지정된 폭과 높이, 그리고 쉐이더를 사용해 직사각형을 그립니다.</p>
 <h3><code>DrawRectShaderOptions</code></h3>
 <pre lang="en"><code>type DrawRectShaderOptions struct {
     // GeoM is a geometry matrix to draw.
@@ -98,76 +110,122 @@ func Fragment(position vec4, texCoord vec2, color vec4) vec4 {
     // すべての画像の大きさは矩形の大きさと同じでなければならない。
     Images [4]*Image
 }</code></pre>
+<pre lang="kr"><code>type DrawRectShaderOptions struct {
+    // GeoM은 렌더링을 위한 기하 행렬입니다.
+    // 기본값은 단위행렬로, 직사각형을 (0, 0)에 그리게 됩니다.
+    GeoM GeoM
+
+    // CompositeMode는 화면의 Composite Mode를 의미합니다.
+    // 기본값은 기본적인 알파블렌딩입니다.
+    CompositeMode CompositeMode
+
+    // Uniforms은 쉐이더를 위한 Uniform 변수 Set입니다.
+    // 키는 Uniform 변수의 이름입니다.
+    // 값은 반드시 float이나 []float이어야 합니다.
+    // 만약 Uniform 변수가 배열, 벡터 혹은 행렬이라면
+    // 선형으로 펼쳐진 슬라이스로 만들어야 합니다.
+    // 예를 들어, Uniform 변수의 타입이 [4]vec4라면 슬라이스의 크기는 16이 될겁니다.
+    Uniforms map[string]interface{}
+
+    // Images는 화면에 그릴 이미지 배열입니다.
+    // 모든 이미지의 크기는 직사각형과 같아야 합니다.
+    Images [4]*Image
+}</code></pre>
 <h3 lang="en">The others</h3>
 <h3 lang="ja">その他</h3>
+<h3 lang="kr">기타</h3>
 <p lang="en">For more primitive rendering, there are also <code>(*Image).DrawTrianglesShader</code> and <code>DrawTrianglesShaderOptions</code>.</p>
 <p lang="ja">よりプリミティブな描画のために、 <code>(*Image).DrawTrianglesShader</code> と <code>DrawTrianglesShaderOptions</code> もあります。</p>
+<p lang="kr">좀 더 Primitive하게 렌더링하기 위해, <code>(*Image).DrawTrianglesShader</code>나 <code>DrawTrianglesShaderOptions</code>도 사용할 수 있습니다.</p>
 <h2 lang="en">Shading language Kage</h2>
 <h2 lang="ja">シェーディング言語 Kage</h2>
+<h2 lang="kr">쉐이딩 언어 Kage</h2>
 <h3 lang="en">Syntax</h3>
 <h3 lang="ja">文法</h3>
+<h3 lang="kr">문법</h3>
 <p lang="en">The syntax is basically same as Go. This is completely same in the syntax level. You can do even <code>gofmt</code>.</p>
 <p lang="ja">基本的に Go と同じです。文法レベルでは完全互換です。 <code>gofmt</code> を実行することさえ出来ます。</p>
+<p lang="kr">근본적으로 Go와 같은 문법을 사용합니다. 문법 수준에서는 완전히 호환됩니다. <code>gofmt</code>를 사용할 수도 있습니다.</p>
 <p lang="en">Kage doesn't have these Go's features so far.</p>
 <p lang="ja">Kage には現在 Go の以下の機能がありません。</p>
+<p lang="kr">Kage는 아래에 나열된 Go의 기능을 지원하지 않습니다.</p>
 <ul>
   <li lang="en">Most types (<code>rune</code>, <code>string</code>, numeric types except for <code>int</code>, <code>interface</code>, slices, pointers, structs, function types, channels)</li>
   <li lang="ja">ほとんどの型 (<code>rune</code>、 <code>string</code>、 <code>int</code> を除く数値型、 <code>interface</code>、スライス、ポインタ、構造体、関数型、チャネル)</li>
+  <li lang="kr">대부분의 타입 (<code>rune</code>, <code>string</code>, <code>int</code>를 제외한 수 타입, <code>interface</code>, 슬라이스, 포인터, 구조체, 함수형, 채널)</li>
   <li lang="en">Built-in functions except for <code>len</code> (e.g., <code>new</code>, <code>make</code>, <code>panic</code>)</li>
   <li lang="ja"><code>len</code> 以外の組み込み関数 (<code>new</code>、 <code>make</code>、 <code>panic</code> など)</li>
+  <li lang="kr"><code>len</code>을 제외한 내장 함수 (<code>new</code>、 <code>make</code>、 <code>panic</code> 등등)</li>
   <li lang="en">New type definition with <code>type</code></li>
   <li lang="ja"><code>type</code> による新しい型の定義</li>
+  <li lang="kr"><code>type</code>을 사용한 새 타입 정의</li>
   <li lang="en">Structs</li>
   <li lang="ja">構造体</li>
+  <li lang="kr">구조체</li>
   <li><code>import</code></li>
   <li><code>switch</code></li>
   <li><code>goto</code></li>
   <li><code>for-range</code></li>
   <li lang="en">Goroutines</li>
   <li lang="ja">ゴルーチン</li>
+  <li lang="kr">고루틴</li>
   <li><code>defer</code></li>
   <li lang="en"><code>init</code> functions</li>
   <li lang="ja"><code>init</code> 関数</li>
+  <li lang="kr"><code>init</code> 함수</li>
   <li lang="en">Method definition</li>
   <li lang="ja">メソッド定義</li>
+  <li lang="kr">메소드 정의</li>
 </ul>
 <h3 lang="en">Entry point</h3>
 <h3 lang="ja">エントリーポイント</h3>
+<h3 lang="kr">엔트리 포인트</h3>
 <p lang="en">Kage can define only a fragment shader. The <code>Fragment</code> function with the below signature is the entrypoint.</p>
 <p lang="ja">Kage が現在定義できるのはフラグメントシェーダのみです。以下のシグニチャを持つ <code>Fragment</code> 関数がエントリーポイントになります。</p>
+<p lang="kr">Kage는 Fragment 쉐이더만 작성할 수 있습니다. <code>Fragment</code> 함수가 엔트리 포인트입니다.</p>
 <pre><code>func Fragment(position vec4, texCoord vec2, color vec4) vec4</code></pre>
 <table>
-  <tr><th><span lang="en">Name</span><span lang="ja">名前</span></th><th><span lang="en">Type</span><span lang="ja">型</span></th><th><span lang="en">Description</span><span lang="ja">説明</span></th></tr>
-  <tr><td><code>position</code></td><td><code>vec4</code><td><span lang="en">The destination position in pixels. The 3rd and 4th components are always 0 and 1.</span><span lang="ja">描画先の座標。単位はピクセル。第 3、第 4 要素は常にそれぞれ 0、 1。</span></td></tr>
-  <tr><td><code>texCoord</code></td><td><code>vec2</code><td><span lang="en">The source texture's position in texels.</span><span lang="ja">描画元テクスチャの座標。単位はテクセル。</span></td></tr>
-  <tr><td><code>color</code></td><td><code>vec4</code><td><span lang="en">Supplemental color information given from vertices. Each component values are in between 0 and 1. This value is meaningful only when <code>DrawTrianglesShader</code> is used.</span><span lang="ja">頂点から与えられる補助的な色情報。各要素は 0 から 1 の値。 <code>DrawTrianglesShader</code> 関数使用時にのみ意味を持つ。</span></td></tr>
-  <tr><td><span lang="en">(Returning value)</span><span lang="ja">(戻り値)</span></td><td><code>vec4</code><td><span lang="en">The current position's color. Each component values are in between 0 and 1.</span><span lang="ja">現在の座標の色。各要素は 0 から 1 の値。</span></td></tr>
+  <tr><th><span lang="en">Name</span><span lang="ja">名前</span><span lang="kr">이름</span></th><th><span lang="en">Type</span><span lang="ja">型</span><span lang="kr">타입</span></th><th><span lang="en">Description</span><span lang="ja">説明</span><span lang="kr">설명</span></th></tr>
+  <tr><td><code>position</code></td><td><code>vec4</code><td><span lang="en">The destination position in pixels. The 3rd and 4th components are always 0 and 1.</span><span lang="ja">描画先の座標。単位はピクセル。第 3、第 4 要素は常にそれぞれ 0、 1。</span><span lang="kr">화면상의 좌표입니다. 단위는 픽셀입니다. 세번째, 네번째 요소는 항상 0과 1입니다.</span></td></tr>
+  <tr><td><code>texCoord</code></td><td><code>vec2</code><td><span lang="en">The source texture's position in texels.</span><span lang="ja">描画元テクスチャの座標。単位はテクセル。</span><span lang="kr">소스 텍스쳐의 좌표입니다. 단위는 텍셀입니다.</span></td></tr>
+  <tr><td><code>color</code></td><td><code>vec4</code><td><span lang="en">Supplemental color information given from vertices. Each component values are in between 0 and 1. This value is meaningful only when <code>DrawTrianglesShader</code> is used.</span><span lang="ja">頂点から与えられる補助的な色情報。各要素は 0 から 1 の値。 <code>DrawTrianglesShader</code> 関数使用時にのみ意味を持つ。</span><span lang="kr">꼭짓점에서의 보조 색상값입니다. 각 요소는 0에서 1의 범위를 가집니다. <code>DrawTrianglesShader</code>를 사용하는 경우에만 의미가 있습니다.</span></td></tr>
+  <tr><td><span lang="en">(Returning value)</span><span lang="ja">(戻り値)</span><span lang="kr">(반환값)</span></td><td><code>vec4</code><td><span lang="en">The current position's color. Each component values are in between 0 and 1.</span><span lang="ja">現在の座標の色。各要素は 0 から 1 の値。</span><span lang="kr">현 좌표의 색상입니다. 각 요소는 0에서 1의 값을 가집니다.</span></td></tr>
 </table>
 <h3 lang="en">Built-in types</h3>
 <h3 lang="ja">組み込み型</h3>
+<h3 lang="kr">내장 타입</h3>
 <p lang="en">Kage has these built-in types.</p>
 <p lang="ja">Kage は次の組み込み型を持ちます。</p>
+<p lang="kr">Kage는 다음과 같은 내장 타입을 가지고 있습니다.</p>
 <ul>
   <li><code>bool</code></li>
   <li><code>int</code></li>
   <li><code>float</code></li>
   <li lang="en"><code>vec2</code>, <code>vec3</code>, <code>vec4</code> (Vector)</li>
   <li lang="ja"><code>vec2</code>, <code>vec3</code>, <code>vec4</code> (ベクター型)</li>
+  <li lang="kr"><code>vec2</code>, <code>vec3</code>, <code>vec4</code> (벡터)</li>
   <li lang="en"><code>mat2</code>, <code>mat3</code>, <code>mat4</code> (Matrix)</li>
   <li lang="ja"><code>mat2</code>, <code>mat3</code>, <code>mat4</code> (行列型)</li>
+  <li lang="kr"><code>mat2</code>, <code>mat3</code>, <code>mat4</code> (행렬)</li>
 </ul>
 <p lang="en"><code>float</code> is a floating point number. Unlike Go's <code>float32</code> and <code>float64</code>, <code>float</code> doesn't have a guarantee for the precision.</p>
 <p lang="ja"><code>float</code> は浮動小数点型です。 Go の <code>float32</code> や <code>float64</code> とは異なり精度の保証がありません。</p>
+<p lang="kr"><code>float</code>은 부동소수점 실수입니다. Go의 <code>float32</code>나 <code>float64</code>와는 다르게, 정밀도가 보장되지 않습니다.</p>
 <p lang="en"><code>vec2</code>, <code>vec3</code>, <code>vec4</code>, called vectors, are tuples that has 2, 3, and 4 components respectively. Each component is <code>float</code>. Swizzling operation is available on vector values.</p>
 <p lang="ja"><code>vec2</code>、 <code>vec3</code>、 <code>vec4</code> はベクターと呼ばれ、それぞれ 2、 3、 4 つの値の組を表す型です。各要素は <code>float</code> です。 Swizzling と呼ばれる操作を行えます。</p>
+<p lang="kr"><code>vec2</code>, <code>vec3</code>, <code>vec4</code>는 벡터라 부르는, 각각 2, 3, 4개 요소의 튜플입니다. 각 요소는 <code>float</code>입니다. 각 벡터값은 Swizzling 할 수 있습니다.</p>
 <p lang="en"><code>mat2</code>, <code>mat3</code>, <code>mat4</code> are 2, 3 and 4 dimensional square matrices. Each component is <code>float</code>.</p>
 <p lang="ja"><code>mat2</code>、 <code>mat3</code>、 <code>mat4</code> はそれぞれ 2、 3、 4 次の正方行列を表す型です。各要素は <code>float</code> です。</p>
+<p lang="kr"><code>mat2</code>、 <code>mat3</code>、 <code>mat4</code>은 각각 2, 3, 4개의 정사각행렬을 나타내는 타입입니다. 각 요소는 <code>float</code>입니다.</p>
 <p lang="en">Kage also supports arrays. Kage doesn't support structs yet.</p>
 <p lang="ja">Kage は他に配列型をサポートします。構造体はまだサポートされていません。</p>
+<p lang="kr">Kage는 배열 역시 지원합니다. 단 구조체는 지원하지 않습니다.</p>
 <h3 lang="en">Initializing functions for built-in types</h3>
 <h3 lang="ja">組み込み型の初期化関数</h3>
+<h3 lang="kr">내장 타입의 초기화 함수</h3>
 <p lang="en">Similar to Go, you can get the type's value by using the type name as a function. Vector types and matrix types are so special that they can take flexible arguments.</p>
 <p lang="ja">Go と似ていますが、型名を関数のように使うことでその型の値を得ることが出来ます。ベクター型と行列型だけ特殊で、引数を柔軟に取りえます。</p>
+<p lang="kr">Go와 비슷하게, 타입명을 함수처럼 사용해서 타입의 값을 만들 수 있습니다. 벡터 타입이나 행렬 타입은 특수하게 가변개의 인자를 가집니다.</p>
 <pre><code>v1 := vec4(0)              // Returns a vec4 whose components are all 0.
 v2 := vec4(1, 2, 3, 4)     // Returns a vec4 whose components are 1, 2, 3 and 4.
 v3 := vec3(5, 6, 7)
@@ -177,14 +235,17 @@ m1 := mat4(2)              // Returns a mat4 whose diagonal components are 2 and
 m2 := mat4(v1, v2, v3, v1) // Returns a mat4 whose columns are v1, v2, v3 and v1.</code></pre>
 <h3 lang="en">Swizzling</h3>
 <h3 lang="ja">Swizzling</h3>
+<h3 lang="kr">Swizzling</h3>
 <p lang="en">There is a special operation called Swizzling for vector types. You can read and write multiple components at the same time.</p>
 <p lang="ja">ベクター型には Swizzling と呼ばれる特殊な操作があります。要素の一部また全部を一度に読み書きできます。</p>
+<p lang="kr">벡터 타입에는 Swizzling이라는 기능을 사용할 수 있습니다. 요소의 일부 또는 전부를 한번에 읽거나 쓸 수 있습니다.</p>
 <pre><code>v1 := vec4(1, 2, 3, 4)
 v2 := v1.xyz           // Get vec3(1, 2, 3) and initialize v2 with this.
 v2.xyz = v2.xxx        // Get vec3(1, 1, 1), and set it to all the components to v2.
                        // Then, v2 is now (1, 1, 1).</code></pre>
 <p lang="en">Each component is represent like below. You can mix them in the same group, but you cannot in different groups. For example, <code>.xxyy</code> and <code>.abgr</code> are available, but <code>.xxgg</code> is invalid.</p>
 <p lang="ja">各要素は次のように表されます。同じグループ内ならば自由に組み合わせができますが、違うグループのものを混ぜることはできません。例えば <code>.xxyy</code> や <code>.abgr</code> は問題ありませんが、 <code>.xxgg</code> などは無効です。</p>
+<p lang="kr">각 요소는 다음과 같이 나타냅니다. 같은 그룹에 속해있다면 자유롭게 조합이 가능하지만, 다른 그룹의 값을 섞을수는 없습니다. 예를 들어, <code>.xxyy</code>나 <code>.abgr</code>은 문제없이 쓸 수 있지만 <code>.xxgg</code>같은 경우는 사용할 수 없습니다.</p>
 <ul>
   <li><code>x</code>, <code>y</code>, <code>z</code>, <code>w</code></li>
   <li><code>r</code>, <code>g</code>, <code>b</code>, <code>a</code></li>
@@ -192,90 +253,103 @@ v2.xyz = v2.xxx        // Get vec3(1, 1, 1), and set it to all the components to
 </ul>
 <h3 lang="en">Uniform variables</h3>
 <h3 lang="ja">Uniform 変数</h3>
+<h3 lang="kr">Uniform 변수</h3>
 <p lang="en">A uniform variable is a global variable whose value is given externally. This value is the same regardless of the position of the pixel.</p>
 <p lang="ja">Uniform 変数はシェーダの外部から値が与えられるグローバル変数です。この値はピクセルの位置に依らず一定となります。</p>
+<p lang="kr">Uniform 변수는 셰이더 외부에서 값이 주어지는 글로벌 변수입니다.이 값은 픽셀의 위치에 관계없이 일정합니다.</p>
 <p lang="en">In Kage, uniform variables are global variables that start with upper cases (i.e., exported variables).</p>
 <p lang="ja">Kage では Uniform 変数は大文字から始まる (export される) グローバル変数になります。</p>
+<p lang="kr">Kage에서 Uniform 변수는 대문자로 시작하는 (export 되는) 글로벌 변수를 의미합니다.</p>
 <p lang="en">You cannot assign a value into a uniform variable in Kage.</p>
 <p lang="ja">Uniform 変数は Kage の中では代入することができません。</p>
+<p lang="kr">Kage 안에서 Uniform 변수에 값을 할당할 수는 없습니다.</p>
 <p lang="en">You cannot define other global variables than uniform variables in Kage.</p>
 <p lang="ja">Kage では Uniform 変数以外のグローバル変数を定義することができません。</p>
+<p lang="kr">Kage에서 Uniform이 아닌 글로벌 변수는 정의할 수 없습니다.</p>
 <h3 lang="en">Built-in functions (Go)</h3>
 <h3 lang="ja">組み込み関数 (Go)</h3>
+<h3 lang="kr">내장 함수 (Go)</h3>
 <table>
-  <tr><th><span lang="en">Function</span><span lang="ja">関数</span></th><th><span lang="en">Description</span><span lang="ja">説明</span></th></tr>
-  <tr><th><code>cap(x T) int</code></th><td><span lang="en"><code>T</code> is an array type. Returns the length of the array. (v2.1.0)</span><span lang="ja"><code>T</code> は配列型。配列の長さを返す。 (v2.1.0)</span></td></tr>
-  <tr><th><code>len(x T) int</code></th><td><span lang="en"><code>T</code> is an array type. Returns the length of the array.</span><span lang="ja"><code>T</code> は配列型。配列の長さを返す。</span></td></tr>
+  <tr><th><span lang="en">Function</span><span lang="ja">関数</span><span lang="kr">함수</span></th><th><span lang="en">Description</span><span lang="ja">説明</span><span lang="kr">설명</span></th></tr>
+  <tr><th><code>cap(x T) int</code></th><td><span lang="en"><code>T</code> is an array type. Returns the length of the array. (v2.1.0)</span><span lang="ja"><code>T</code> は配列型。配列の長さを返す。 (v2.1.0)</span><span lang="kr"><code>T</code>는 배열입니다. 배열의 길이를 반환합니다. (v2.1.0)</span></td></tr>
+  <tr><th><code>len(x T) int</code></th><td><span lang="en"><code>T</code> is an array type. Returns the length of the array.</span><span lang="ja"><code>T</code> は配列型。配列の長さを返す。</span><span lang="kr"><code>T</code>는 배열입니다. 배열의 길이를 반환합니다.</span></td></tr>
 </table>
 <h3 lang="en">Built-in functions (mathematics)</h3>
 <h3 lang="ja">組み込み関数 (数学)</h3>
+<h3 lang="kr">내장 함수 (수학)</h3>
 <p lang="en">Most of the built-in functions are generic. <code>T</code> represents <code>float</code>, <code>vec2</code>, <code>vec3</code> or <code>vec4</code> unless otherwise noted. When the type is a vector, the function is applied for each component.</p>
 <p lang="ja">多くの組み込み関数はジェネリックです。断りがない場合、 <code>T</code> は <code>float</code>、 <code>vec2</code>、 <code>vec3</code>、 <code>vec4</code> のいずれかを表します。ベクター型の場合、各要素に関数が適用されます。</p>
+<p lang="kr">대부분의 내장 함수는 제네릭합니다. 따로 명시되어 있지 않을 경우 <code>T</code>는 <code>float</code>、 <code>vec2</code>、 <code>vec3</code>、 <code>vec4</code>중 하나를 나타냅니다.벡터형의 경우 각 요소에 함수가 적용됩니다.</p>
 <table>
-  <tr><th><span lang="en">Function</span><span lang="ja">関数</span></th><th><span lang="en">Description</span><span lang="ja">説明</span></th></tr>
-  <tr><th><code>sin(x T) T</code></th><td><span lang="en">Returns <span class="math">\sin{x}</span></span><span lang="ja"><span class="math">\sin{x}</span> を返す。</span></td></tr>
-  <tr><th><code>cos(x T) T</code></th><td><span lang="en">Returns <span class="math">\cos{x}</span></span><span lang="ja"><span class="math">\cos{x}</span> を返す。</span></td></tr>
-  <tr><th><code>tan(x T) T</code></th><td><span lang="en">Returns <span class="math">\tan{x}</span></span><span lang="ja"><span class="math">\tan{x}</span> を返す。</span></td></tr>
-  <tr><th><code>asin(x T) T</code></th><td><span lang="en">Returns <span class="math">\arcsin{x}</span></span><span lang="ja"><span class="math">\arcsin{x}</span> を返す。</span></td></tr>
-  <tr><th><code>acos(x T) T</code></th><td><span lang="en">Returns <span class="math">\arccos{x}</span></span><span lang="ja"><span class="math">\arccos{x}</span> を返す。</span></td></tr>
-  <tr><th><code>atan(y_over_x T) T</code></th><td><span lang="en">Returns <span class="math">\arctan(\mathit{y\_over\_x})</span></span><span lang="ja"><span class="math">\arctan(\mathit{y\_over\_x})</span> を返す。</span></td></tr>
-  <tr><th><code>atan2(y, x T) T</code></th><td><span lang="en">Returns <span class="math">\arctan(y/x)</span></span><span lang="ja"><span class="math">\arctan(y/x)</span> を返す。</span></td></tr>
-  <tr><th><code>pow(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x^y</span></span><span lang="ja"><span class="math">x^y</span> を返す。</span></td></tr>
-  <tr><th><code>exp(x T) T</code></th><td><span lang="en">Returns <span class="math">e^{x}</span></span><span lang="ja"><span class="math">e^{x}</span> を返す。</span></td></tr>
-  <tr><th><code>log(x T) T</code></th><td><span lang="en">Returns <span class="math">\log_e{x}</span></span><span lang="ja"><span class="math">\log_e{x}</span> を返す。</span></td></tr>
-  <tr><th><code>exp2(x T) T</code></th><td><span lang="en">Returns <span class="math">2^{x}</span></span><span lang="ja"><span class="math">2^{x}</span> を返す。</span></td></tr>
-  <tr><th><code>log2(x T) T</code></th><td><span lang="en">Returns <span class="math">\log_2{x}</span></span><span lang="ja"><span class="math">\log_2{x}</span> を返す。</span></td></tr>
-  <tr><th><code>sqrt(x T) T</code></th><td><span lang="en">Returns <span class="math">\sqrt{x}</span></span><span lang="ja"><span class="math">\sqrt{x}</span> を返す。</span></td></tr>
-  <tr><th><code>inversesqrt(x T) T</code></th><td><span lang="en">Returns <span class="math">1/\sqrt{x}</span></span><span lang="ja"><span class="math">1/\sqrt{x}</span> を返す。</span></td></tr>
-  <tr><th><code>abs(x T) T</code></th><td><span lang="en">Returns <span class="math">x</span> if <span class="math">x \ge 0</span>, or <span class="math">-x</span> otherwise</span><span lang="ja"><span class="math">x \geq 0</span> ならば <span class="math">x</span> を、それ以外の場合は <span class="math">-x</span> を返す。</span></td></tr>
-  <tr><th><code>sign(x T) T</code></th><td><span lang="en">Returns <span class="math">1</span> if <span class="math">x \gt 0</span>, <span class="math">0</span> if <span class="math">x = 0</span>, or <span class="math">-1</span> otherwise</span><span lang="ja"><span class="math">x \gt 0</span> ならば <span class="math">1</span> を、<span class="math">x = 0</span> ならば <span class="math">0</span> を、それ以外の場合は <span class="math">-1</span> を返す。</span></td></tr>
-  <tr><th><code>floor(x T) T</code></th><td><span lang="en">Returns a value equal to the nearest integer that is less than or equal to <span class="math">x</span></span><span lang="ja"><span class="math">x</span> 以下の最も近い整数と同じ値を返す。</span></td></tr>
-  <tr><th><code>ceil(x T) T</code></th><td><span lang="en">Returns a value equal to the nearest integer that is greater than or equal to <span class="math">x</span></span><span lang="ja"><span class="math">x</span> 以上の最も近い整数と同じ値を返す。</span></td></tr>
-  <tr><th><code>fract(x T) T</code></th><td><span lang="en">Returns <span class="math">x - \mathrm{floor}(x)</span></span><span lang="ja"><span class="math">x - \mathrm{floor}(x)</span> を返す。</span></td></tr>
-  <tr><th><code>mod(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x - y \cdot \mathrm{floor}(x/y)</span></span><span lang="ja"><span class="math">x - y \cdot \mathrm{floor}(x/y)</span> を返す。</span></td></tr>
-  <tr><th><code>min(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x</span> if <span class="math">x \lt y</span>, or <span class="math">y</span> otherwise</span><span lang="ja"><span class="math">x \lt y</span> ならば <span class="math">x</span> を、それ以外の場合は <span class="math">y</span> を返す。</span></td></tr>
-  <tr><th><code>max(x, y T) T</code></th><td><span lang="en">Returns <span class="math">y</span> if <span class="math">x \lt y</span>, or <span class="math">x</span> otherwise</span><span lang="ja"><span class="math">x \lt y</span> ならば <span class="math">y</span> を、それ以外の場合は <span class="math">x</span> を返す。</span></td></tr>
-  <tr><th><code>clamp(x, min_value, max_value T) T</code></th><td><span lang="en">Returns <span class="math">\min(\max(x, \mathit{min\_value}), \mathit{max\_value})</span></span><span lang="ja"><span class="math">\min(\max(x, \mathit{min\_value}), \mathit{max\_value})</span> を返す。</span></td></tr>
-  <tr><th><code>mix(x, y, a T) T</code></th><td><span lang="en">Returns <span class="math">x \cdot (1 - a) + y \cdot a</span></span><span lang="ja"><span class="math">x \cdot (1 - a) + y \cdot a</span> を返す。</span></td></tr>
-  <tr><th><code>step(edge, x T) T</code></th><td><span lang="en">Returns <span class="math">0</span> if <span class="math">x \lt \mathit{edge}</span>, or <span class="math">1</span> otherwise</span><span lang="ja"><span class="math">x \lt \mathit{edge}</span> ならば <span class="math">0</span> を、それ以外の場合は <span class="math">1</span> を返す。</span></td></tr>
-  <tr><th><code>smoothstep(edge0, edge1, x T) T</code></th><td><span lang="en">Returns <span class="math">0</span> if <span class="math">x \le \mathit{edge0}</span>, <span class="math">1</span> if <span class="math">x \ge \mathit{edge1}</span>, or performs smooth Hermite interpolation between <span class="math">0</span> and <span class="math">1</span> otherwise</span><span lang="ja"><span class="math">x \le \mathit{edge0}</span> ならば <span class="math">0</span> を、 <span class="math">x \ge \mathit{edge1}</span> ならば <span class="math">1</span> を、それ以外の場合はエルミート補間を <span class="math">0</span> から <span class="math">1</span> の値で行った値を返す。</span></td></tr>
-  <tr><th><code>length(x T) float</code></th><td><span lang="en">Returns <span class="math">\sqrt{x[0]^2 + x[1]^2 + \cdots}</span></span><span lang="ja"><span class="math">\sqrt{x[0]^2 + x[1]^2 + \cdots}</span> を返す。</span></td></tr>
-  <tr><th><code>distance(p0, p1 T) float</code></th><td><span lang="en">Returns <span class="math">\mathrm{length}(p0 - p1)</span></span><span lang="ja"><span class="math">\mathrm{length}(p0 - p1)</span> を返す。</span></td></tr>
-  <tr><th><code>dot(x, y T) float</code></th><td><span lang="en">Returns <span class="math">x[0] \cdot y[0] + x[1] \cdot y[1] + \cdots</span></span><span lang="ja"><span class="math">x[0] \cdot y[0] + x[1] \cdot y[1] + \cdots</span> を返す。</span></td></tr>
-  <tr><th><code>cross(x, y vec3) vec3</code></th><td><span lang="en">Returns <span class="math">x \times y</span> (cross product)</span><span lang="ja"><span class="math">x \times y</span> (クロス積) を返す。</span></td></tr>
-  <tr><th><code>normalize(x T) T</code></th><td><span lang="en">Returns a vector in the same direction as <span class="math">x</span> but with a length of 1</span><span lang="ja"><span class="math">x</span> と同じ向きを持つが長さが 1 のベクターを返す。</span></td></tr>
-  <tr><th><code>faceforward(n, i, nref T) T</code></th><td><span lang="en">Returns <span class="math">n</span> if <span class="math">\mathrm{dot}(\mathit{nref}, i) \lt 0</span>, or <span class="math">-n</span> otherwise</span><span lang="ja"><span class="math">\mathrm{dot}(\mathit{nref}, i) \lt 0</span> ならば <span class="math">n</span> を、それ以外の場合は <span class="math">-n</span> を返す。</span></td></tr>
-  <tr><th><code>reflect(i, n T) T</code></th><td><span lang="en">Returns <span class="math">i - 2 \cdot \mathrm{dot}(n, i) \cdot n</span></span><span lang="ja"><span class="math">i - 2 \cdot \mathrm{dot}(n, i) \cdot n</span> を返す。</span></td></tr>
+  <tr><th><span lang="en">Function</span><span lang="ja">関数</span><span lang="kr">함수</span></th><th><span lang="en">Description</span><span lang="ja">説明</span><span lang="kr">설명</span></th></tr>
+  <tr><th><code>sin(x T) T</code></th><td><span lang="en">Returns <span class="math">\sin{x}</span></span><span lang="ja"><span class="math">\sin{x}</span> を返す。</span><span lang="kr"><span class="math">\sin{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>cos(x T) T</code></th><td><span lang="en">Returns <span class="math">\cos{x}</span></span><span lang="ja"><span class="math">\cos{x}</span> を返す。</span><span lang="kr"><span class="math">\cos{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>tan(x T) T</code></th><td><span lang="en">Returns <span class="math">\tan{x}</span></span><span lang="ja"><span class="math">\tan{x}</span> を返す。</span><span lang="kr"><span class="math">\tan{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>asin(x T) T</code></th><td><span lang="en">Returns <span class="math">\arcsin{x}</span></span><span lang="ja"><span class="math">\arcsin{x}</span> を返す。</span><span lang="kr"><span class="math">\arcsin{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>acos(x T) T</code></th><td><span lang="en">Returns <span class="math">\arccos{x}</span></span><span lang="ja"><span class="math">\arccos{x}</span> を返す。</span><span lang="kr"><span class="math">\arccos{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>atan(y_over_x T) T</code></th><td><span lang="en">Returns <span class="math">\arctan(\mathit{y\_over\_x})</span></span><span lang="ja"><span class="math">\arctan(\mathit{y\_over\_x})</span> を返す。</span><span lang="kr"><span class="math">\arctan(\mathit{y\_over\_x})</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>atan2(y, x T) T</code></th><td><span lang="en">Returns <span class="math">\arctan(y/x)</span></span><span lang="ja"><span class="math">\arctan(y/x)</span> を返す。</span><span lang="kr"><span class="math">\arctan(y/x)</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>pow(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x^y</span></span><span lang="ja"><span class="math">x^y</span> を返す。</span><span lang="kr"><span class="math">x^y</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>exp(x T) T</code></th><td><span lang="en">Returns <span class="math">e^{x}</span></span><span lang="ja"><span class="math">e^{x}</span> を返す。</span><span lang="kr"><span class="math">e^{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>log(x T) T</code></th><td><span lang="en">Returns <span class="math">\log_e{x}</span></span><span lang="ja"><span class="math">\log_e{x}</span> を返す。</span><span lang="kr"><span class="math">\log_e{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>exp2(x T) T</code></th><td><span lang="en">Returns <span class="math">2^{x}</span></span><span lang="ja"><span class="math">2^{x}</span> を返す。</span><span lang="kr"><span class="math">2^{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>log2(x T) T</code></th><td><span lang="en">Returns <span class="math">\log_2{x}</span></span><span lang="ja"><span class="math">\log_2{x}</span> を返す。</span><span lang="kr"><span class="math">\log_2{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>sqrt(x T) T</code></th><td><span lang="en">Returns <span class="math">\sqrt{x}</span></span><span lang="ja"><span class="math">\sqrt{x}</span> を返す。</span><span lang="kr"><span class="math">\sqrt{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>inversesqrt(x T) T</code></th><td><span lang="en">Returns <span class="math">1/\sqrt{x}</span></span><span lang="ja"><span class="math">1/\sqrt{x}</span> を返す。</span><span lang="kr"><span class="math">1/\sqrt{x}</span>를 반환합니다.</span></td></tr>
+  <tr><th><code>abs(x T) T</code></th><td><span lang="en">Returns <span class="math">x</span> if <span class="math">x \ge 0</span>, or <span class="math">-x</span> otherwise</span><span lang="ja"><span class="math">x \geq 0</span> ならば <span class="math">x</span> を、それ以外の場合は <span class="math">-x</span> を返す。</span><span lang="kr"><span class="math">x \geq 0</span>이라면 <span class="math">x</span>을, 그 외의 경우에는 <span class="math">-x</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>sign(x T) T</code></th><td><span lang="en">Returns <span class="math">1</span> if <span class="math">x \gt 0</span>, <span class="math">0</span> if <span class="math">x = 0</span>, or <span class="math">-1</span> otherwise</span><span lang="ja"><span class="math">x \gt 0</span> ならば <span class="math">1</span> を、<span class="math">x = 0</span> ならば <span class="math">0</span> を、それ以外の場合は <span class="math">-1</span> を返す。</span><span lang="kr"><span class="math">x \gt 0</span>이라면 <span class="math">1</span>을, <span class="math">x = 0</span>이라면 <span class="math">0</span>을, 그 외의 경우에는 <span class="math">-1</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>floor(x T) T</code></th><td><span lang="en">Returns a value equal to the nearest integer that is less than or equal to <span class="math">x</span></span><span lang="ja"><span class="math">x</span> 以下の最も近い整数と同じ値を返す。</span><span lang="kr"><span class="math">x</span>이하의 가장 가까운 정수 값을 반환합니다.</span></td></tr>
+  <tr><th><code>ceil(x T) T</code></th><td><span lang="en">Returns a value equal to the nearest integer that is greater than or equal to <span class="math">x</span></span><span lang="ja"><span class="math">x</span> 以上の最も近い整数と同じ値を返す。</span><span lang="kr"><span class="math">x</span>이상의 가장 가까운 정수 값을 반환합니다.</span></td></tr>
+  <tr><th><code>fract(x T) T</code></th><td><span lang="en">Returns <span class="math">x - \mathrm{floor}(x)</span></span><span lang="ja"><span class="math">x - \mathrm{floor}(x)</span> を返す。</span><span lang="kr"><span class="math">x - \mathrm{floor}(x)</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>mod(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x - y \cdot \mathrm{floor}(x/y)</span></span><span lang="ja"><span class="math">x - y \cdot \mathrm{floor}(x/y)</span> を返す。</span><span lang="kr"><span class="math">x - y \cdot \mathrm{floor}(x/y)</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>min(x, y T) T</code></th><td><span lang="en">Returns <span class="math">x</span> if <span class="math">x \lt y</span>, or <span class="math">y</span> otherwise</span><span lang="ja"><span class="math">x \lt y</span> ならば <span class="math">x</span> を、それ以外の場合は <span class="math">y</span> を返す。</span><span lang="kr"><span class="math">x \lt y</span>이라면 <span class="math">x</span>을, 그 외의 경우에는 <span class="math">y</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>max(x, y T) T</code></th><td><span lang="en">Returns <span class="math">y</span> if <span class="math">x \lt y</span>, or <span class="math">x</span> otherwise</span><span lang="ja"><span class="math">x \lt y</span> ならば <span class="math">y</span> を、それ以外の場合は <span class="math">x</span> を返す。</span><span lang="kr"><span class="math">x \lt y</span>이라면 <span class="math">y</span>을, 그 외의 경우에는 <span class="math">x</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>clamp(x, min_value, max_value T) T</code></th><td><span lang="en">Returns <span class="math">\min(\max(x, \mathit{min\_value}), \mathit{max\_value})</span></span><span lang="ja"><span class="math">\min(\max(x, \mathit{min\_value}), \mathit{max\_value})</span> を返す。</span><span lang="kr"><span class="math">\min(\max(x, \mathit{min\_value}), \mathit{max\_value})</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>mix(x, y, a T) T</code></th><td><span lang="en">Returns <span class="math">x \cdot (1 - a) + y \cdot a</span></span><span lang="ja"><span class="math">x \cdot (1 - a) + y \cdot a</span> を返す。</span><span lang="kr"><span class="math">x \cdot (1 - a) + y \cdot a</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>step(edge, x T) T</code></th><td><span lang="en">Returns <span class="math">0</span> if <span class="math">x \lt \mathit{edge}</span>, or <span class="math">1</span> otherwise</span><span lang="ja"><span class="math">x \lt \mathit{edge}</span> ならば <span class="math">0</span> を、それ以外の場合は <span class="math">1</span> を返す。</span><span lang="kr"><span class="math">x \lt \mathit{edge}</span>이라면 <span class="math">0</span>을, 그 외의 경우에는 <span class="math">1</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>smoothstep(edge0, edge1, x T) T</code></th><td><span lang="en">Returns <span class="math">0</span> if <span class="math">x \le \mathit{edge0}</span>, <span class="math">1</span> if <span class="math">x \ge \mathit{edge1}</span>, or performs smooth Hermite interpolation between <span class="math">0</span> and <span class="math">1</span> otherwise</span><span lang="ja"><span class="math">x \le \mathit{edge0}</span> ならば <span class="math">0</span> を、 <span class="math">x \ge \mathit{edge1}</span> ならば <span class="math">1</span> を、それ以外の場合はエルミート補間を <span class="math">0</span> から <span class="math">1</span> の値で行った値を返す。</span><span lang="kr"><span class="math">x \le \mathit{edge0}</span>이라면 <span class="math">0</span>을,  <span class="math">x \ge \mathit{edge1}</span> 이라면 <span class="math">1</span>을, 그 외의 경우에는 에르미트 보간을 <span class="math">0</span>부터 <span class="math">1</span>까지 적용한 값을 반환합니다.</span></td></tr>
+  <tr><th><code>length(x T) float</code></th><td><span lang="en">Returns <span class="math">\sqrt{x[0]^2 + x[1]^2 + \cdots}</span></span><span lang="ja"><span class="math">\sqrt{x[0]^2 + x[1]^2 + \cdots}</span> を返す。</span><span lang="kr"><span class="math">\sqrt{x[0]^2 + x[1]^2 + \cdots}</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>distance(p0, p1 T) float</code></th><td><span lang="en">Returns <span class="math">\mathrm{length}(p0 - p1)</span></span><span lang="ja"><span class="math">\mathrm{length}(p0 - p1)</span> を返す。</span><span lang="kr"><span class="math">\mathrm{length}(p0 - p1)</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>dot(x, y T) float</code></th><td><span lang="en">Returns <span class="math">x[0] \cdot y[0] + x[1] \cdot y[1] + \cdots</span></span><span lang="ja"><span class="math">x[0] \cdot y[0] + x[1] \cdot y[1] + \cdots</span> を返す。</span><span lang="kr"><span class="math">x[0] \cdot y[0] + x[1] \cdot y[1] + \cdots</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>cross(x, y vec3) vec3</code></th><td><span lang="en">Returns <span class="math">x \times y</span> (cross product)</span><span lang="ja"><span class="math">x \times y</span> (クロス積) を返す。</span><span lang="kr"><span class="math">x \times y</span>(벡터곱)을 반환합니다.</span></td></tr>
+  <tr><th><code>normalize(x T) T</code></th><td><span lang="en">Returns a vector in the same direction as <span class="math">x</span> but with a length of 1</span><span lang="ja"><span class="math">x</span> と同じ向きを持つが長さが 1 のベクターを返す。</span><span lang="kr"><span class="math">x</span>와 같은 방향을 가지지만 길이가 1인 벡터를 반환합니다.</span></td></tr>
+  <tr><th><code>faceforward(n, i, nref T) T</code></th><td><span lang="en">Returns <span class="math">n</span> if <span class="math">\mathrm{dot}(\mathit{nref}, i) \lt 0</span>, or <span class="math">-n</span> otherwise</span><span lang="ja"><span class="math">\mathrm{dot}(\mathit{nref}, i) \lt 0</span> ならば <span class="math">n</span> を、それ以外の場合は <span class="math">-n</span> を返す。</span><span lang="kr"><span class="math">\mathrm{dot}(\mathit{nref}, i) \lt 0</span>이라면 <span class="math">n</span>을, 그 외의 경우에는 <span class="math">-n</span>을 반환합니다.</span></td></tr>
+  <tr><th><code>reflect(i, n T) T</code></th><td><span lang="en">Returns <span class="math">i - 2 \cdot \mathrm{dot}(n, i) \cdot n</span></span><span lang="ja"><span class="math">i - 2 \cdot \mathrm{dot}(n, i) \cdot n</span> を返す。</span><span lang="kr"><span class="math">i - 2 \cdot \mathrm{dot}(n, i) \cdot n</span>을 반환합니다.</span></td></tr>
   <tr><th><code>refract(i, n T, eta float) T</code></th><td>(TBD)</td></tr>
-  <tr><th><code>transpose(m T) T</code></th><td><span lang="en"><code>T</code> is a matrix type. Returns a matrix that is the transpose of <span class="math">x</span></span><span lang="ja"><code>T</code> は行列型。<span class="math">x</span> の転置行列を返す。</span></td></tr>
+  <tr><th><code>transpose(m T) T</code></th><td><span lang="en"><code>T</code> is a matrix type. Returns a matrix that is the transpose of <span class="math">x</span></span><span lang="ja"><code>T</code> は行列型。<span class="math">x</span> の転置行列を返す。</span><span lang="kr"><code>T</code>는 행렬입니다.<span class="math">x</span>의 전치행렬을 반환합니다.</span></td></tr>
   <tr><th><code>dfdx(p T) T</code></th><td>(TBD) <a href="#footnote_1">*1</a></td></tr>
   <tr><th><code>dfdy(p T) T</code></th><td>(TBD) <a href="#footnote_1">*1</a></td></tr>
   <tr><th><code>fwidth(p T) T</code></th><td>(TBD) <a href="#footnote_1">*1</a></td></tr>
 </table>
 <ul>
-  <li><span id="footnote_1">*1</span> <span lang="en">These functions don't work on Android or browsers. We plan to fix this in v2.1.0 (<a href="https://github.com/hajimehoshi/ebiten/issues/1404">Issue 1404</a>).</span><span lang="ja">これらの関数はAndroid 上とブラウザ上で動きません。 v2.1.0 で修正される予定です (<a href="https://github.com/hajimehoshi/ebiten/issues/1404">Issue 1404</a>)。</span></li>
+  <li><span id="footnote_1">*1</span> <span lang="en">These functions don't work on Android or browsers. We plan to fix this in v2.1.0 (<a href="https://github.com/hajimehoshi/ebiten/issues/1404">Issue 1404</a>).</span><span lang="ja">これらの関数はAndroid 上とブラウザ上で動きません。 v2.1.0 で修正される予定です (<a href="https://github.com/hajimehoshi/ebiten/issues/1404">Issue 1404</a>)。</span><span lang="kr">이 함수들은 안드로이드의 웹브라우저에서 동작하지 않습니다(<a href="https://github.com/hajimehoshi/ebiten/issues/1404">Issue 1404</a>).</span></li>
 </ul>
 <h3 lang="en">Built-in functions (images)</h3>
 <h3 lang="ja">組み込み関数 (画像)</h3>
+<h3 lang="kr">내장 함수 (그래픽)</h3>
 <table>
-  <tr><th><span lang="en">Function</span><span lang="ja">関数</span></th><th><span lang="en">Description</span><span lang="ja">説明</span></th></tr>
-  <tr><th><code>imageSrc<i>N</i>At(pos vec2) vec4</code></th><td><span lang="en">Returns the color value as <code>vec4</code> at the given position <code>pos</code> in texels of the source image <i>N</i>. <i>N</i> is 0 to 3.</span><span lang="ja">描画画像 <i>N</i> の、与えられたテクセル単位の位置 <code>pos</code> の色を <code>vec4</code> で返す。 <i>N</i> は 0 から 3 の値を取る。</span></td></tr>
-  <tr><th><code>imageSrc<i>N</i>UnsafeAt(pos vec2) vec4</code></th><td><span lang="en">Returns the color value as <code>vec4</code> at the given position <code>pos</code> in texels of the source image <i>N</i>. <i>N</i> is 0 to 3. The difference from the safe version (<code>imageSrc<i>N</i>At</code>) is the returning value when the position is out of the bounds. The safe version returns <code>vec4(0)</code> in this case, while the unsafe version's returning value is undefined. The unsafe version is faster. If you are sure that the position is in the bounds, you can use the unsafe version for performance.</span><span lang="ja">描画画像 <i>N</i> の、与えられたテクセル単位の位置 <code>pos</code> の色を <code>vec4</code> で返す。 <i>N</i> は 0 から 3 の値を取る。セーフバージョン (<code>imageSrc<i>N</i>At</code>) との違いは、画像の境界外の位置を指定したときの戻り値である。セーフバージョンはこの場合 <code>vec4(0)</code> を返すが、アンセーフバージョンは未定義である。アンセーフバージョンは高速に動作する。もし位置が画像の境界内にあることが確実ならば、パフォーマンスのためにアンセーフバージョンを使ってもよい。</span></td></tr>
-  <tr><th><code>imageSrcTextureSize() vec2</code></th><td><span lang="en">Returns the source image's texture size in pixels</span><span lang="ja">描画元画像のテクスチャの大きさをピクセル単位で返す。</span></td></tr>
-  <tr><th><code>imageDstTextureSize() vec2</code></th><td><span lang="en">Returns the destination image's texture size in pixels</span><span lang="ja">描画先画像のテクスチャの大きさをピクセル単位で返す。</span></td></tr>
-  <tr><th><code>imageSrcRegionOnTexture() (vec2, vec2)</code></th><td><span lang="en">Returns the source image's origin position and the size on the texture in texels</span><span lang="ja">描画元画像の、テクスチャ上の原点位置と大きさをテクセル単位で返す。</span></td></tr>
-  <tr><th><code>imageDstRegionOnTexture() (vec2, vec2)</code></th><td><span lang="en">Returns the destination image's origin position and the size on the texture in texels (v2.1.0)</span><span lang="ja">描画先画像の、テクスチャ上の原点位置と大きさをテクセル単位で返す。 (v2.1.0)</span></td></tr>
+  <tr><th><span lang="en">Function</span><span lang="ja">関数</span><span lang="kr">関数</span></th><th><span lang="en">Description</span><span lang="ja">説明</span><span lang="kr">説明</span></th></tr>
+  <tr><th><code>imageSrc<i>N</i>At(pos vec2) vec4</code></th><td><span lang="en">Returns the color value as <code>vec4</code> at the given position <code>pos</code> in texels of the source image <i>N</i>. <i>N</i> is 0 to 3.</span><span lang="ja">描画画像 <i>N</i> の、与えられたテクセル単位の位置 <code>pos</code> の色を <code>vec4</code> で返す。 <i>N</i> は 0 から 3 の値を取る。</span><span lang="kr">소스 이미지 <i>N</i>에서 텍셀 좌표 <code>pos</code>에 위치하는 색을 <code>vec4</code>로 반환합니다. <i>N</i>은 0에서 3의 값을 가집니다.</span></td></tr>
+  <tr><th><code>imageSrc<i>N</i>UnsafeAt(pos vec2) vec4</code></th><td><span lang="en">Returns the color value as <code>vec4</code> at the given position <code>pos</code> in texels of the source image <i>N</i>. <i>N</i> is 0 to 3. The difference from the safe version (<code>imageSrc<i>N</i>At</code>) is the returning value when the position is out of the bounds. The safe version returns <code>vec4(0)</code> in this case, while the unsafe version's returning value is undefined. The unsafe version is faster. If you are sure that the position is in the bounds, you can use the unsafe version for performance.</span><span lang="ja">描画画像 <i>N</i> の、与えられたテクセル単位の位置 <code>pos</code> の色を <code>vec4</code> で返す。 <i>N</i> は 0 から 3 の値を取る。セーフバージョン (<code>imageSrc<i>N</i>At</code>) との違いは、画像の境界外の位置を指定したときの戻り値である。セーフバージョンはこの場合 <code>vec4(0)</code> を返すが、アンセーフバージョンは未定義である。アンセーフバージョンは高速に動作する。もし位置が画像の境界内にあることが確実ならば、パフォーマンスのためにアンセーフバージョンを使ってもよい。</span><span lang="kr">소스 이미지 <i>N</i>에서 텍셀 좌표 <code>pos</code>에 위치하는 색을 <code>vec4</code>로 반환합니다. <i>N</i>은 0에서 3의 값을 가집니다. Safe한 함수(<code>imageSrc<i>N</i>At</code>)와의 차이는, 이미지의 범위를 벗어난 좌표가 주어졌을 때 반환하는 값입니다. Safe한 함수는 <code>vec4(0)</code>를 반환하지만, 이 함수의 반환값은 정의되어 있지 않습니다(즉, 쓰레기 값을 리턴합니다). 이 함수가 더 빠르게 동작합니다. 만약 좌표가 소스 텍스쳐 내에 존재한다는 확신이 있다면 이 함수를 사용해도 좋습니다.</span></td></tr>
+  <tr><th><code>imageSrcTextureSize() vec2</code></th><td><span lang="en">Returns the source image's texture size in pixels</span><span lang="ja">描画元画像のテクスチャの大きさをピクセル単位で返す。</span><span lang="kr">소스 이미지의 텍스쳐 크기를 픽셀 단위로 반환합니다.</span></td></tr>
+  <tr><th><code>imageDstTextureSize() vec2</code></th><td><span lang="en">Returns the destination image's texture size in pixels</span><span lang="ja">描画先画像のテクスチャの大きさをピクセル単位で返す。</span><span lang="kr">타겟 이미지의 텍스쳐 크기를 픽셀 단위로 반환합니다.</span></td></tr>
+  <tr><th><code>imageSrcRegionOnTexture() (vec2, vec2)</code></th><td><span lang="en">Returns the source image's origin position and the size on the texture in texels</span><span lang="ja">描画元画像の、テクスチャ上の原点位置と大きさをテクセル単位で返す。</span><span lang="kr">소스 이미지의 텍스쳐 상 원점 좌표와 크기를 텍셀 단위로 반환합니다.</span></td></tr>
+  <tr><th><code>imageDstRegionOnTexture() (vec2, vec2)</code></th><td><span lang="en">Returns the destination image's origin position and the size on the texture in texels (v2.1.0)</span><span lang="ja">描画先画像の、テクスチャ上の原点位置と大きさをテクセル単位で返す。 (v2.1.0)</span><span lang="kr">타겟 이미지의 텍스쳐 상 원점 좌표와 크기를 텍셀 단위로 반환합니다. (v2.1.0)</span></td></tr>
 </table>
 <h3 lang="en">Textures and images</h3>
 <h3 lang="ja">テクスチャと画像</h3>
+<h3 lang="kr">텍스쳐와 이미지</h3>
 <div class="grid-container">
   <div class="grid-item-2">
     <p lang="en">Ebiten's image (<code>ebiten.Image</code>) is actually a part of an internal texture. Then, position calculations in shaders are a little complex.</p>
     <p lang="ja">Ebiten の画像 (<code>ebiten.Image</code>) は実際には内部のテクスチャ上の一部です。そのためシェーダ上での座標計算が少々複雑になります。</p>
+    <p lang="kr">Ebiten의 이미지(<code>ebiten.Image</code>)는 실제로 내부적으로 사용되는  텍스쳐의 일부입니다. 그래서, 좌표 계산이 다소 복잡해집니다.</p>
     <p lang="en">A pixel is a unit for one color dot. On the other hand, texel is a unit covering the whole area with values in between 0 and 1. The meaning of texels depends on a texture, then you cannot mix texels with different textures.</p>
     <p lang="ja">ピクセルは 1 画素を 1 とする単位です。一方テクセルは 0 から 1 の範囲が全体を表す単位です。テクセルの意味はテクスチャに依存するため、異なるテクスチャのテクセルを混ぜることは出来ません。</p>
+    <p lang="kr">픽셀은 한 화소당 1의 값을 갖는 단위입니다. 반면 텍셀은 0에서 1의 범위로 전체를 나타내는 단위입니다. 텍셀의 정의가 텍스쳐에 의존하기 때문에, 다른 텍스쳐가 섞일 수 없게 됩니다.</p>
     <p lang="en">To convert pixels and texels each other, you can use these formulas.</p>
     <p lang="ja">ピクセルとテクセルを相互に変換するには次の式を使います。</p>
+    <p lang="kr">픽셀과 텍셀을 서로 변환하기 위해 다음 수식을 사용할 수 있습니다.</p>
     <p class="math">\begin{aligned}
 (\text{texels}) &= \frac{(\text{pixels})}{(\text{the texture's size in pixels})} \\
 (\text{pixels}) &= (\text{texels}) \cdot (\text{the texture's size in pixels}) \\
