@@ -152,13 +152,13 @@
   <li lang="kr">Address 값이 동일할 것 (<code>DrawTriangles</code>)</li>
 </ul>
 <p lang="en">Even when all the above conditions are satisfied, multiple draw commands can be used in really rare cases. Ebiten images usually share an internal automatic texture atlas, but when you consume the atlas, or you create a huge image, those images cannot be on the same texture atlas. In this case, draw commands are separated. The texture atlas size is 4096x4096 so far. Another case is when you use an offscreen as a render source. An offscreen doesn't share the texture atlas with high probability.</p>
-<p lang="kr">위의 모든 조건이 충족 되더라도 매우 드문 경우에 여러 그리기 명령을 사용할 수 있습니다. Ebiten 이미지는 일반적으로 내부 자동 텍스처 아틀라스를 공유하지만 아틀라스를 사용하거나 거대한 이미지를 만들 때 이러한 이미지는 동일한 텍스처 아틀라스에있을 수 없습니다. 이 경우 그리기 명령이 분리됩니다. 지금까지 텍스처 아틀라스 크기는 4096x4096입니다. 또 다른 경우는 오프 스크린을 렌더 소스로 사용하는 경우입니다. 오프 스크린은 높은 확률로 텍스처 아틀라스를 공유하지 않습니다.</p>
+<p lang="kr">위의 모든 조건이 충족 되더라도 상황에 따라 여러 렌더 명령을 사용할 수도 있습니다. Ebiten 이미지는 보통 내부적으로 같은 텍스처 아틀라스를 공유하지만, 커다란 이미지를 사용하거나 하는 등의 경우에는 같은 텍스쳐 아틀라스에 존재할 수 없기 때문에 렌더 명령이 분리됩니다. 텍스쳐 아틀라스의 크기는 4096x4096 정도입니다. 또 다른 경우는 오프 스크린을 렌더 소스로 사용하는 경우입니다. 오프 스크린은 높은 확률로 텍스처 아틀라스를 공유하지 않습니다.</p>
 <p lang="en">examples/sprites is a good example to draw > 10000 sprites with one (or a few) draw command(s).</p>
 <p lang="kr">examples/sprites 는 10000개 이상의 Sprites를 한 개의 Draw 명령(혹은 적은 수의 Draw 명령)으로 처리하는 좋은 예시입니다.</p>
 <h2 lang="en">Know the actual drawing commands with <code>ebitendebug</code> build tag</h2>
-<h2 lang="kr">실제 어떻게 그려지는지 <code>ebitendebug</code> build tag로 확인해보기</h2>
+<h2 lang="kr">실제 어떻게 그려지는지 <code>ebitendebug</code> 빌드 태그로 확인해보기</h2>
 <p lang="en">To see actual drawing commands, you can use <code>ebitendebug</code> build tag. For example, if you execute <code>blocks</code> example, you will see the below logs:</p>
-<p lang="kr">실제 Draw 명령을 확인해보고 싶다면, <code>ebitendebug</code> build tag를 사용하세요. 예를 들어, <code>blocks</code> 예시를 실행하면 아래와 같은 로그를 확인할 수 있습니다.</p>
+<p lang="kr">실제 Draw 명령을 확인해보고 싶다면, <code>ebitendebug</code> 빌드 태그를 사용하세요. 예를 들어, <code>blocks</code> 예시를 실행하면 아래와 같은 로그를 확인할 수 있습니다.</p>
 <pre><code>go run -tags=example,ebitendebug github.com/hajimehoshi/ebiten/v2/examples/blocks</code></pre>
 <pre><code>...
 --
@@ -210,11 +210,6 @@ B.DrawImage(A, op) // cyclic drawing! Avoid this if possible.</code></pre>
 <p lang="en">Creating an <code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player">audio.Player</a></code> is not expensive. It is fine to create one player for one short sound effect. For example, this code is totally fine:</p>
 <p lang="kr"><code><a href="https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio#Player">audio.Player</a></code>를 만드는데는 높은 비용이 필요하지 않습니다. 한 개의 짧은 음향 효과를 재생하기 위해 한 개의 플레이어를 생성해도 됩니다. 즉, 아래 코드처럼 써도 됩니다.</p>
 <pre lang="en"><code>// PlaySE plays a sound effect.
-func PlaySE(bs []byte) {
-    sePlayer := audio.NewPlayerFromBytes(audioContext, bs)
-    // sePlayer is never GCed as long as it plays.
-    sePlayer.Play()
-}</code></pre>
 func PlaySE(bs []byte) {
     sePlayer := audio.NewPlayerFromBytes(audioContext, bs)
     // sePlayer is never GCed as long as it plays.
